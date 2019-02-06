@@ -1,5 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-<h1>{{ title }}</h1>
+{% block login %}
+    {% include 'bundles/FOSUserbundle/layout.html.twig' %}
 {% endblock %}
+
+{% block body %}
+
+    <section class="bg-primary" id="about">
+        {% include 'blog/views/about.html.twig' %}
+    </section>
+
+    <section id="skills">
+        {% include 'blog/views/skills.html.twig' %}
+    </section>
+
+{% endblock %}
+
+
+   
