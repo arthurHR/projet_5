@@ -1,10 +1,22 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 mx-auto text-center">
-            <h2 class="section-heading text-white">We've got what you need!</h2>
+            <h2 class="section-heading text-white">A propos</h2>
             <hr class="light my-4">
-            <p class="text-faded mb-4">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
-            <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a>
+            <div id="about">
+                {% for about in data['about'] %}
+                    <img class="img-thumbnail" alt="Porfil_Image" src="{{ vich_uploader_asset(about, 'imageFile') }}"
+                        data-holder-rendered="true" style="vertical-align: middle;
+                        width: 200px;
+                        height: auto;
+                        margin-bottom : 50px;
+                        margin-top : 50px;">
+                    <p class="text-faded mb-4">{{ about.description }}</p>
+                {% endfor %}
+            </div>
         </div>
     </div>
+    {% if is_granted('ROLE_ADMIN') %}
+        {% include 'blog/views/modal/changeAbout.html.twig' %}
+    {% endif %}
 </div>

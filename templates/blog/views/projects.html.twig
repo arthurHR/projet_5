@@ -1,0 +1,34 @@
+
+<!-- Portfolio Section -->
+    <div class="container-fluid p-0">
+        <div class="row no-gutters" id="projects">
+            {% for project in data['projects'] %}
+                <div class="col-lg-4 col-sm-6 text-center project">
+                    <a class="portfolio-box" href="{{ project.link }}">
+                        <img class="img-fluid" src="{{ vich_uploader_asset(project, 'imageFile') }}" alt="{{ project.title }}">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-white-50">
+                                    {{ project.title }}
+                                </div>
+                                <div class="project-name">
+                                {{ project.description }}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <button class="btn btn-danger btn-lg" onClick="DeleteProject({{ project.id }})">Supprimer</button>
+                        <button class="btn btn-success btn-lg" onClick="UpdateProject({{ project.id }})">Modifier</button>
+                    {% endif %}
+                </div>       
+            {% endfor %} 
+        </div>
+     {% if is_granted('ROLE_ADMIN') %}
+        {% include 'blog/views/modal/newProject.html.twig' %}
+        {% include 'blog/views/modal/changeProject.html.twig' %}
+    {% endif %}
+ </div>
+ 
+
+    

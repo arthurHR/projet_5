@@ -6,13 +6,24 @@
 
 {% block body %}
 
-    <section class="bg-primary" id="about">
+    <section class="bg-primary" id="aboutSection">
         {% include 'blog/views/about.html.twig' %}
     </section>
 
-    <section id="skills">
+    <section id="skillSection">
         {% include 'blog/views/skills.html.twig' %}
     </section>
+
+    <section id="projectSection">
+        {% include 'blog/views/projects.html.twig' %}
+    </section>
+
+    <section id="contactSection">
+        {% include 'blog/views/contact.html.twig' %}
+    </section>
+
+    <input type="file" onchange="previewFile()"><br>
+<img class="img" src="" height="200" alt="Image preview...">
     
 {% endblock %}
 

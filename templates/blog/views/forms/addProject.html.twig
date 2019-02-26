@@ -1,0 +1,9 @@
+    {{ form_start(form, {'attr': {'id': 'form_project'}})}}
+        {{ form_row(form.title, { 'label': 'Titre' }) }}
+        {{ form_row(form.description, { 'label': 'Description' }) }}
+        {{ form_row(form.link, { 'label': 'Lien vers le project' }) }}
+        {{ form_row(form.imageFile, { 'label': 'Télécharger une image' }) }}
+        <button type="submit" class="btn btn-primary" data-label="Enregistrer">
+				  Enregistrer
+	    	</button>
+    {{ form_end(form) }}

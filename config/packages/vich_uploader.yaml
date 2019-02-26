@@ -1,0 +1,24 @@
+vich_uploader:
+    db_driver: orm # or mongodb or propel or phpcr
+
+    mappings:
+        skills_image:
+            uri_prefix: /images/skills
+            upload_destination: '%kernel.project_dir%/public/images/skills'
+            inject_on_load: true
+        
+        projects_image:
+            uri_prefix: /images/projects
+            upload_destination: '%kernel.project_dir%/public/images/projects'
+            inject_on_load: true
+        
+        about_image:
+            uri_prefix: /images/about
+            upload_destination: '%kernel.project_dir%/public/images/about'
+            namer: vich_uploader.namer_origname # permet d'avoir un nom d'image unique
+            inject_on_load: true # injecte l'image au chargement du formulaire
+            delete_on_update: true
+            delete_on_remove: true
+           
+
+        

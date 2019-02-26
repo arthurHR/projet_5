@@ -36,8 +36,9 @@ class SecurityController extends AbstractController
 
         }
 
-        return $this->render('blog/views/skill.html.twig', [
+        return $this->render('blog/views/register.html.twig', [
             'RegistrationType' => $form->createView(),
         ]);
     } 
 }
+

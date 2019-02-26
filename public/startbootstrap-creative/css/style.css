@@ -1,0 +1,70 @@
+
+.skillsImg {
+  width: 50%;
+  height: 50%;
+  justify-content:center;
+}
+
+#skillForm {
+    display: none;
+}
+
+#addSkillButton{
+  margin-top:5%;
+}
+
+div.skill {
+  position : relative;
+}
+
+div.skill button {
+  visibility: hidden;
+  font-size : 0.8em;
+}
+
+div.skill:hover img {
+  opacity: 0.6;
+}
+
+div.skill:hover button {
+  visibility: visible;
+  opacity: 1;
+}
+
+.box
+{
+  margin-bottom: 100px;
+}
+
+div.project button {
+  visibility: hidden;
+  font-size : 0.8em;
+  margin : 30px 0;
+}
+
+div.project:hover button {
+  visibility: visible;
+  opacity: 1;
+}
+
+button.delete {
+  background-color: #dd2518;
+}
+
+button.update {
+  background-color: #a18d1d;
+}
+
+
+.modal-body img {
+  width: 200px;
+  margin: 20px 0;
+}
+
+.custom-file-label::after{
+  content : 'Parcourir';
+}
+
+.custom-file-label{
+  overflow : hidden;
+}

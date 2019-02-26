@@ -3,9 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Entity\File as EmbeddedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SkillsRepository")
+ * @Vich\Uploadable
  */
 class Skills
 {
@@ -21,10 +26,25 @@ class Skills
      */
     private $title;
 
-    /**
-     * @ORM\Column(type="text")
+     /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
      */
-    private $content;
+    private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="skills_image", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+
 
     public function getId(): ?int
     {
@@ -43,15 +63,31 @@ class Skills
         return $this;
     }
 
-    public function getContent(): ?string
+    public function setImageFile(File $image = null)
     {
-        return $this->content;
+        $this->imageFile = $image;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
     }
 
-    public function setContent(string $content): self
+    public function getImageFile()
     {
-        $this->content = $content;
+        return $this->imageFile;
+    }
 
-        return $this;
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
 }
