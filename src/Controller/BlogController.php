@@ -14,6 +14,7 @@ use App\Repository\AboutRepository;
 use App\Repository\ProjectsRepository;
 use App\Entity\Projects;
 use App\Form\ProjectsType;
+use App\Form\ContactType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -153,9 +154,7 @@ class BlogController extends AbstractController
         if($request->isXmlHttpRequest()){
                 $id = $request->get('id');
                 $em = $this->getDoctrine()->getManager();
-
                 $projects= $em->getRepository(Projects::class)->find($id);
-
                 $em->remove($projects);
                 $em->flush();
                 return new Response(' #projects');               
@@ -170,21 +169,56 @@ class BlogController extends AbstractController
 
             $em = $this->getDoctrine()->getManager();
             $about = new About();
-            $id = 1;
-            $about = $em->getRepository(About::class)->find($id);
-            $form = $this->createForm(AboutType::class, $about, array(
-                'action' => $this->generateUrl($request->get('_route'), array('id' => $id))
+            $about = $em->getRepository(About::class)->findAll();
+            $form = $this->createForm(AboutType::class, $about[0], array(
+                'action' => $this->generateUrl($request->get('_route'))
             ));
-
+ 
             $form->handleRequest($request);
 
                 if ($form->isSubmitted() && $form->isValid()) {
-                    $em->persist($about);
+                    $em->persist($about[0]);
                     $em->flush();
                     return new Response(' #about');
                 }
+                
             return $this->render('blog/views/forms/updateAbout.html.twig', [
                 'form' => $form->createView(),
             ]);   
     } 
+
+     /**
+     * @Route("/contact", name="contact")
+     */
+    public function index(Request $request, \Swift_Mailer $mailer)
+    {
+        $form = $this->createForm(ContactType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $contactFormData = $form->getData();
+            $messageContent = $this->render('blog/views/email/email.html.twig', ['contactData' => $contactFormData]);
+            $message = (new \Swift_Message('You Got Mail!'))
+               ->setSender($contactFormData['from'])
+               ->setTo('richarthur123@gmail.com')
+               /*->setBody(
+                   $contactFormData['message'],
+                   $contactFormData['from'], 'text/plain'  
+               );*/
+               ->setBody($messageContent, 'text/html');
+               
+
+           $mailer->send($message);
+           $this->addFlash('success', 'It sent!');
+           
+
+           return $this->redirectToRoute('contact');
+        }
+
+        return $this->render('blog/views/forms/contact.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }

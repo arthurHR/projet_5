@@ -1,18 +1,3 @@
-function previewFile() {
-    var preview = document.querySelector('.modal-body img');
-    var file    = document.querySelector('.modal-body input[type=file]').files[0];
-    
-    var reader  = new FileReader();
-    reader.addEventListener("load", function () {
-      preview.src = reader.result;
-    }, false);
-  
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
-
-
 function DeleteSkill(id){
     deleteSkill = Object.create(deleteItem);
     var url = ('/deleteSkill');
@@ -57,12 +42,37 @@ function UpdateProject(id){
         delete updateProject.submitForm();
     });             
 };
+
+function previewFile() {
+    
+    changeImage.init();
+    delete changeImage.init();
+};
  
+var modifyImage = {
+        init : function () {
+            var preview = document.querySelector('.form-group img');
+            var file    = document.querySelector('.custom-file input[type=file]').files[0];
+            alert('hi');
+            console.log(preview);
+            console.log(file);
+            var reader  = new FileReader();
+            console.log(reader);
+            reader.addEventListener("load", function () {
+            preview.src = reader.result;
+            });
+        
+            if (file) {
+            reader.readAsDataURL(file);
+            console.log(file);
+            };
+        },
+};
 
 
 $(document).ready(function(){
+    changeImage = Object.create(modifyImage);
 
-  
     addSkill = Object.create(addItem);
     var eventItem = $('#skill_add_Modal');
     var url = '/addSkill';
@@ -83,6 +93,7 @@ $(document).ready(function(){
     var formId = '#form_about';
     var reload_target = ' #about';
     updateAbout.init(eventItem, url, formId, reload_target);
+    
 });
 
 
