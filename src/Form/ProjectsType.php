@@ -24,7 +24,7 @@ class ProjectsType extends AbstractType
                 'download_link' => false, // not mandatory, default is true
                 'image_uri' => true,
                 'download_uri' => true,
-                'attr' => ['onChange' => 'previewFile()'],
+                'attr' => ['onChange' => 'previewFile(this)'],
             ));
     }
 
