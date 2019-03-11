@@ -1,12 +1,14 @@
 
 
-console.log('ajax');
-
-function DeleteSkill(id){
-    alert(id);
+window.DeleteSkill = function(id){
+    deleteSkill = Object.create(deleteItem);
+    var url = ('/deleteSkill');
+    var reload_target = ' #skills';
+    deleteSkill.init(id, url, reload_target);
 };
 
-function DeleteProject(id){
+
+window.DeleteProject = function(id){
     deleteProject = Object.create(deleteItem);
     var url = ('/deleteProject');
     var reload_target = ' #projects';
@@ -14,7 +16,7 @@ function DeleteProject(id){
 }; 
 
 
-function UpdateSkill(id){
+window.UpdateSkill = function(id){
     var updateSkill = Object.create(updateItem);
     var eventItem = $('#skill_update_Modal');
     var url = '/updateSkill';
@@ -29,7 +31,7 @@ function UpdateSkill(id){
     });             
 };
 
-function UpdateProject(id){
+window.UpdateProject = function(id){
     var updateProject = Object.create(updateItem);
     var eventItem = $('#project_update_Modal');
     var url = '/updateProject';
@@ -44,7 +46,7 @@ function UpdateProject(id){
     });             
 };
 
-function previewFile(input) { 
+window.previewFile = function (input) { 
     var changeImage = Object.create(modifyImage);  
     changeImage.init(input);  
 };
@@ -192,7 +194,7 @@ var addItem = {
             var $submitButton = $form.find(':submit');
             $submitButton.html('<i class="fas fa-spinner fa-pulse"></i>');
             $submitButton.prop('disabled', true);
-            $form.ajaxSubmit({
+            $.ajax({
                 type: 'post',
                 success: function(data) {
                     if (data == objet.reload_target){

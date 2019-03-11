@@ -8,7 +8,7 @@ Encore
     .setPublicPath('/build')
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
-
+    .autoProvidejQuery()
     /*
      * ENTRY CONFIG
      *
@@ -21,7 +21,11 @@ Encore
     .addEntry('main', './assets/entry/main.js')
     .addEntry('admin', './assets/entry/admin.js')
     //.addEntry('page2', './assets/js/page2.js')
-
+    /*.createSharedEntry('vendor', [
+        '../node_modules/jquery/dist/jquery.min.js',
+        '../node_modules/jquery-ui-dist/jquery-ui.min.js',
+        '../node_modules/bootstrap/dist/js/bootstrap.js',
+    ])*/
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
@@ -49,9 +53,11 @@ Encore
     .enableTypeScriptLoader()
 
     // uncomment if you're having problems with a jQuery plugin
-    .autoProvidejQuery()
-    //.enableTypeScriptLoader()
+    //.autoProvidejQuery()
 
+   // .autoProvideVariables({
+     //   'window.jQuery': 'jquery'
+    //})
     
 
     // uncomment if you use API Platform Admin (composer req api-admin)

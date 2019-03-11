@@ -80,7 +80,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/updateSkill" , name="updateSkill",  methods={"POST"})
      */
-    public function updateSkillAction(Request $request, SkillsRepository $repoSkills)
+    public function updateSkillAction(Request $request)
     {             
 
             $em = $this->getDoctrine()->getManager();
@@ -106,7 +106,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/updateProject" , name="updateProject",  methods={"POST"})
      */
-    public function updateProjectAction(Request $request, ProjectsRepository $repoProjects)
+    public function updateProjectAction(Request $request)
     {             
 
             $em = $this->getDoctrine()->getManager();
@@ -164,7 +164,7 @@ class BlogController extends AbstractController
      /**
      * @Route("/updateAbout" , name="updateAbout",  methods={"POST"})
      */
-    public function updateAboutAction(Request $request, AboutRepository $repoAbout)
+    public function updateAboutAction(Request $request)
     {             
 
             $em = $this->getDoctrine()->getManager();

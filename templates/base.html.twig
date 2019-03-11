@@ -8,8 +8,8 @@
     
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-        {% block stylesheets %}
-         {{ encore_entry_link_tags('main') }}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('main') }}
 {% endblock %}
     </head>
     <body id="page-top">
@@ -72,11 +72,20 @@
         {% block body %}{% endblock %}
  
 
-        {% block javascripts %}    
-        	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
-      
-            {{ encore_entry_script_tags('main') }}
-          
+        {% block javascripts %}          
+            <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+	        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+            <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+            <!-- Custom scripts for this template -->
+            <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+            <script src="{{ asset('vendor/scrollreveal/scrollreveal.min.js') }}"></script>
+            <script src="{{ asset('vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+
+            <!-- Custom scripts for this template -->
+            <script src="{{ asset('js/creative.min.js') }}"></script>
+            <script src="{{ asset('js/ajaxObject.js') }}"></script>
         {% endblock %}
          
 
