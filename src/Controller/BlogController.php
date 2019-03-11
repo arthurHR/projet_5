@@ -83,10 +83,10 @@ class BlogController extends AbstractController
     public function updateSkillAction(Request $request)
     {             
 
-            $em = $this->getDoctrine()->getManager();
+            $entityManager = $this->getDoctrine()->getManager();
             $skills = new Skills();
             $id = $request->get('id');
-            $skills = $em->getRepository(Skills::class)->find($id);
+            $skills = $entityManager->getRepository(Skills::class)->find($id);
             $form = $this->createForm(SkillsType::class, $skills, array(
                 'action' => $this->generateUrl($request->get('_route'), array('id' => $id))
             ));
@@ -94,8 +94,8 @@ class BlogController extends AbstractController
             $form->handleRequest($request);
 
                 if ($form->isSubmitted() && $form->isValid()) {
-                    $em->persist($skills);
-                    $em->flush();
+                    $entityManager->persist($skills);
+                    $entityManager->flush();
                     return new Response(' #skills');
                 }
             return $this->render('blog/views/forms/updateSkill.html.twig', [
@@ -109,10 +109,10 @@ class BlogController extends AbstractController
     public function updateProjectAction(Request $request)
     {             
 
-            $em = $this->getDoctrine()->getManager();
+        $entityManager = $this->getDoctrine()->getManager();
             $projects = new Projects();
             $id = $request->get('id');
-            $projects = $em->getRepository(Projects::class)->find($id);
+            $projects = $entityManager->getRepository(Projects::class)->find($id);
             $form = $this->createForm(ProjectsType::class, $projects, array(
                 'action' => $this->generateUrl($request->get('_route'), array('id' => $id))
             ));
@@ -120,8 +120,8 @@ class BlogController extends AbstractController
             $form->handleRequest($request);
 
                 if ($form->isSubmitted() && $form->isValid()) {
-                    $em->persist($projects);
-                    $em->flush();
+                    $entityManager->persist($projects);
+                    $entityManager->flush();
                     return new Response(' #projects');
                 }
             return $this->render('blog/views/forms/updateProject.html.twig', [
@@ -136,12 +136,12 @@ class BlogController extends AbstractController
     {
         if($request->isXmlHttpRequest()){
                 $id = $request->get('id');
-                $em = $this->getDoctrine()->getManager();
+                $entityManager = $this->getDoctrine()->getManager();
 
-                $skills = $em->getRepository(Skills::class)->find($id);
+                $skills = $entityManager->getRepository(Skills::class)->find($id);
 
-                $em->remove($skills);
-                $em->flush();
+                $entityManager->remove($skills);
+                $entityManager->flush();
                 return new Response(' #skills');               
         }
     }
@@ -153,10 +153,10 @@ class BlogController extends AbstractController
     {
         if($request->isXmlHttpRequest()){
                 $id = $request->get('id');
-                $em = $this->getDoctrine()->getManager();
-                $projects= $em->getRepository(Projects::class)->find($id);
-                $em->remove($projects);
-                $em->flush();
+                $entityManager = $this->getDoctrine()->getManager();
+                $projects= $entityManager->getRepository(Projects::class)->find($id);
+                $entityManager->remove($projects);
+                $entityManager->flush();
                 return new Response(' #projects');               
         }
     }
@@ -167,9 +167,9 @@ class BlogController extends AbstractController
     public function updateAboutAction(Request $request)
     {             
 
-            $em = $this->getDoctrine()->getManager();
+            $entityManager = $this->getDoctrine()->getManager();
             $about = new About();
-            $about = $em->getRepository(About::class)->findAll();
+            $about = $entityManager->getRepository(About::class)->findAll();
             $form = $this->createForm(AboutType::class, $about[0], array(
                 'action' => $this->generateUrl($request->get('_route'))
             ));
@@ -177,8 +177,8 @@ class BlogController extends AbstractController
             $form->handleRequest($request);
 
                 if ($form->isSubmitted() && $form->isValid()) {
-                    $em->persist($about[0]);
-                    $em->flush();
+                    $entityManager->persist($about[0]);
+                    $entityManager->flush();
                     return new Response(' #about');
                 }
                 
