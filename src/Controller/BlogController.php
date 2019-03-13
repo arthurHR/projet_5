@@ -244,7 +244,7 @@ class BlogController extends AbstractController
            $this->addFlash('success', 'It sent!');
            
 
-           return $this->redirectToRoute('contact');
+           return $this->redirectToRoute('home');
         }
 
         return $this->render('blog/views/forms/contact.html.twig', [
