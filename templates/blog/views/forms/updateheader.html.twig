@@ -1,0 +1,18 @@
+{{ form_start(form, {'attr': {'id': 'form_header'}})}}
+    {{ form_row(form.title, { 'label': 'Titre' }) }}
+    {{ form_row(form.subtitle,{ 'label': 'Sous-titre' }) }}
+
+    <button type="submit" name="submitheader" class="btn btn-primary" data-label="Enregistrer">
+        Enregistrer
+    </button>
+{{ form_end(form) }}
+
+  {{ form_start(form, {'attr': {'id': 'form_about'}})}}
+        {{ form_row(form.description, { 'label': 'Description' }) }}
+        {{ form_row(form.imageFile,{ 'label': 'Changer l\'image' }) }}
+
+        <button type="submit" name="submitAbout" class="btn btn-primary" data-label="Enregistrer">
+            Enregistrer
+        </button>
+        
+    {{ form_end(form) }}

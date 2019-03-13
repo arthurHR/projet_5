@@ -5,7 +5,6 @@ require('../startbootstrap-creative/vendor/magnific-popup/magnific-popup.css');
 require('../startbootstrap-creative/css/creative.min.css');
 require('../css/style.css');
 
- // create global $ and jQuery variables
 
 /*require('../startbootstrap-creative/vendor/jquery/jquery.js');
 require('../startbootstrap-creative/vendor/bootstrap/js/bootstrap.bundle.js');

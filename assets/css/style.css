@@ -68,3 +68,7 @@ button.update {
 .custom-file-label{
   overflow : hidden;
 }
+
+div.modal-dialog{
+  color : black;
+}

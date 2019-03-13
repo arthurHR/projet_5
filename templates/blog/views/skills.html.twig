@@ -14,7 +14,7 @@
                     <img class="img-fluid skillsImg"  src="{{ vich_uploader_asset(skill, 'imageFile') }}" alt="{{ skill.title }}" >
                     <h3 class="mb-3">{{ skill.title }}</h3>
                     {% if is_granted('ROLE_ADMIN') %}
-                        <button class="btn btn-danger btn-lg" id="deleteSkill" onClick="DeleteSkill()">Supprimer</button>
+                        <button class="btn btn-danger btn-lg"  onClick="DeleteSkill({{ skill.id }})">Supprimer</button>
                         <button class="btn btn-success btn-lg" onClick="UpdateSkill({{ skill.id }})">Modifier</button>
                     {% endif %}
                 </div>

@@ -194,7 +194,7 @@ var addItem = {
             var $submitButton = $form.find(':submit');
             $submitButton.html('<i class="fas fa-spinner fa-pulse"></i>');
             $submitButton.prop('disabled', true);
-            $.ajax({
+            $form.ajax({
                 type: 'post',
                 success: function(data) {
                     if (data == objet.reload_target){

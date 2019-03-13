@@ -8,6 +8,9 @@ use App\Service\findData;
 use App\Entity\Skills;
 use App\Form\SkillsType;
 use App\Repository\SkillsRepository;
+use App\Entity\Header;
+use App\Form\HeaderType;
+use App\Repository\HeaderRepository;
 use App\Entity\About;
 use App\Form\AboutType;
 use App\Repository\AboutRepository;
@@ -161,6 +164,32 @@ class BlogController extends AbstractController
         }
     }
 
+    /**
+     * @Route("/updateHeader" , name="updateHeader",  methods={"POST"})
+     */
+    public function updateHeaderAction(Request $request)
+    {             
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $header = new Header();
+            $header = $entityManager->getRepository(Header::class)->findAll();
+            $form = $this->createForm(HeaderType::class, $header[0], array(
+                'action' => $this->generateUrl($request->get('_route'))
+            ));
+ 
+            $form->handleRequest($request);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $entityManager->persist($header[0]);
+                    $entityManager->flush();
+                    return new Response(' #header');
+                }
+                
+            return $this->render('blog/views/forms/updateHeader.html.twig', [
+                'form' => $form->createView(),
+            ]);   
+    } 
+
      /**
      * @Route("/updateAbout" , name="updateAbout",  methods={"POST"})
      */
@@ -186,6 +215,7 @@ class BlogController extends AbstractController
                 'form' => $form->createView(),
             ]);   
     } 
+    
 
      /**
      * @Route("/contact", name="contact")

@@ -28,7 +28,7 @@ function UpdateProject(id){
     var url = '/updateProject';
     var formId = '#form_project_update';
     var reload_target = ' #projects';
-    updateProject.init(eventItem, url, formId, id, reload_target);             
+    updateProject.init(eventItem, url, formId, reload_target, id);             
 };
 
 function previewFile(input) { 
@@ -52,6 +52,13 @@ $(document).ready(function(){
     var formId = '#form_project';
     var reload_target = ' #projects';
     addProject.init(eventItem, url, formId, reload_target); 
+
+    updateHeader = Object.create(addItem);
+    var eventItem = $('#header_update_Modal');
+    var url = '/updateHeader';
+    var formId = '#form_header';
+    var reload_target = ' #header';
+    updateHeader.init(eventItem, url, formId, reload_target);
 
     updateAbout = Object.create(addItem);
     var eventItem = $('#about_update_Modal');
