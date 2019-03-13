@@ -12,20 +12,14 @@ function DeleteProject(id){
     deleteProject.init(id, url, reload_target);
 }; 
 
-
 function UpdateSkill(id){
     var updateSkill = Object.create(updateItem);
     var eventItem = $('#skill_update_Modal');
     var url = '/updateSkill';
     var formId = '#form_skill_update';
-    var reload_target = ' #skills';
-  
-    updateSkill.init(eventItem, url, formId, id, reload_target); 
+    var reload_target = ' #skills';;
+    updateSkill.init(eventItem, url, formId, reload_target, id);
     
-    $(document).on('submit', formId , function(e){
-        updateSkill.submitForm(e); 
-        delete updateSkill.submitForm();
-    });             
 };
 
 function UpdateProject(id){
@@ -34,13 +28,7 @@ function UpdateProject(id){
     var url = '/updateProject';
     var formId = '#form_project_update';
     var reload_target = ' #projects';
-  
-    updateProject.init(eventItem, url, formId, id, reload_target); 
-    
-    $(document).on('submit', formId , function(e){
-        updateProject.submitForm(e); 
-        delete updateProject.submitForm();
-    });             
+    updateProject.init(eventItem, url, formId, id, reload_target);             
 };
 
 function previewFile(input) { 
@@ -49,12 +37,7 @@ function previewFile(input) {
 };
 
 
- 
-
-
-
 $(document).ready(function(){
-
 
     addSkill = Object.create(addItem);
     var eventItem = $('#skill_add_Modal');
@@ -112,9 +95,6 @@ var deleteItem =  {
     url : null, 
     reload_target : null,
 
-    /* --------------------------------------------*/
-    /* Méthode d'initialisation                    */
-    /*---------------------------------------------*/
     init : function (id, url, reload_target) 
     {
         this.id = id;
@@ -144,7 +124,6 @@ var deleteItem =  {
     },
 };
 
-//////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -154,9 +133,6 @@ var addItem = {
     formId : null,
     reload_target : null,
 
-    /* --------------------------------------------*/
-    /* Méthode d'initialisation                    */
-    /*---------------------------------------------*/
     init : function (eventItem, url, formId, reload_target) 
     {
         this.eventItem = eventItem;
@@ -181,6 +157,7 @@ var addItem = {
             });
         });
     },
+
 
     submitForm : function () {
         var objet = this;
@@ -217,10 +194,7 @@ var updateItem = {
     id : null,
     reload_target : null,
 
-    /* --------------------------------------------*/
-    /* Méthode d'initialisation                    */
-    /*---------------------------------------------*/
-    init : function (eventItem, url, formId, id, reload_target) 
+    init : function (eventItem, url, formId, reload_target, id)
     {
         this.eventItem = eventItem;
         this.url = url;
@@ -240,15 +214,16 @@ var updateItem = {
                 method: 'post',
                 data: {'id': objet.id},
                 success: function(data) {
-                    modal.find('.modal-body').html(data);          
+                    modal.find('.modal-body').html(data);
+                    objet.submitForm();          
                 },
             });
-        
+            
     },
 
-    submitForm : function (e) {
+    submitForm : function () {
         var objet = this;
-        
+        $(objet.formId).on('submit', function(e){
             e.preventDefault();
             $form = $(e.target);
             modal = objet.eventItem;
@@ -270,6 +245,7 @@ var updateItem = {
                       $submitButton.prop('disabled', false);
                 }
             });
+        });
     }
 
    
