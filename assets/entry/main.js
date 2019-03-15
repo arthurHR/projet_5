@@ -13,4 +13,5 @@ require('../startbootstrap-creative/vendor/scrollreveal/scrollreveal.js');
 require('../startbootstrap-creative/vendor/magnific-popup/jquery.magnific-popup.js');
 require('../startbootstrap-creative/js/ajaxObject.js');
 require('../startbootstrap-creative/js/creative.js');*/
+require('../startbootstrap-creative/js/ajaxObject.js');
 

@@ -21,15 +21,27 @@ use App\Form\ContactType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use FOS\UserBundle\Model\UserManagerInterface;
+use App\Entity\User;
+
+
 
 
 class BlogController extends AbstractController
 {
+    
 
     /**
      * @Route("/" , name="home")
      */
-    public function mainAction(findData $findData) {
+    public function mainAction(findData $findData, UserManagerInterface $userManager) {
+        $users = $userManager->findUsers();
+        dump($users);
+        $roles = "ROLE_SUPER_ADMIN";
+        $em=$this->getDoctrine()->getManager();
+        $repository=$em->getRepository(User::Class);
+        $user=$repository->findByRoles($roles);
+        dump($user);
         $data = $findData->data;
         return $this->render('blog/home.html.twig', ['data' => $data]);
     }
@@ -112,7 +124,7 @@ class BlogController extends AbstractController
     public function updateProjectAction(Request $request)
     {             
 
-        $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $this->getDoctrine()->getManager();
             $projects = new Projects();
             $id = $request->get('id');
             $projects = $entityManager->getRepository(Projects::class)->find($id);
