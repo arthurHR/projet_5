@@ -34,15 +34,10 @@ class BlogController extends AbstractController
     /**
      * @Route("/" , name="home")
      */
-    public function mainAction(findData $findData, UserManagerInterface $userManager) {
-        $users = $userManager->findUsers();
-        dump($users);
-        $roles = "ROLE_SUPER_ADMIN";
-        $em=$this->getDoctrine()->getManager();
-        $repository=$em->getRepository(User::Class);
-        $user=$repository->findByRoles($roles);
-        dump($user);
+    public function mainAction(findData $findData) {
+    
         $data = $findData->data;
+        dump($data);
         return $this->render('blog/home.html.twig', ['data' => $data]);
     }
 
@@ -239,23 +234,16 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $contactFormData = $form->getData();
             $messageContent = $this->render('blog/views/email/email.html.twig', ['contactData' => $contactFormData]);
             $message = (new \Swift_Message('You Got Mail!'))
-               ->setSender($contactFormData['from'])
+               ->setFrom($contactFormData['from'])
                ->setTo('richarthur123@gmail.com')
-               /*->setBody(
-                   $contactFormData['message'],
-                   $contactFormData['from'], 'text/plain'  
-               );*/
+               ->setReplyTo($contactFormData['from'])
                ->setBody($messageContent, 'text/html');
-               
-
            $mailer->send($message);
            $this->addFlash('success', 'It sent!');
-           
-
+        
            return $this->redirectToRoute('home');
         }
 
