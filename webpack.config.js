@@ -2,13 +2,12 @@ var Encore = require('@symfony/webpack-encore');
 
 Encore
     // directory where compiled assets will be stored
-    .setOutputPath('public/build')
-
+    .setOutputPath('public/build/')
     // public path used by the web server to access the output path
     .setPublicPath('/build')
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
-    .autoProvidejQuery()
+
     /*
      * ENTRY CONFIG
      *
@@ -18,51 +17,27 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
-    .addEntry('main', './assets/entry/main.js')
-    .addEntry('admin', './assets/entry/admin.js')
+    .addEntry('mainPage', './assets/entry/main.js')
+    //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
-    /*.createSharedEntry('vendor', [
-        '../node_modules/jquery/dist/jquery.min.js',
-        '../node_modules/jquery-ui-dist/jquery-ui.min.js',
-        '../node_modules/bootstrap/dist/js/bootstrap.js',
-    ])*/
-    // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
-    .splitEntryChunks()
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
 
-    /*
-     * FEATURE CONFIG
-     *
-     * Enable & configure other features below. For a full
-     * list of features, see:
-     * https://symfony.com/doc/current/frontend.html#adding-more-features
-     */
     .cleanupOutputBeforeBuild()
-    .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
 
-    // enables Sass/SCSS support
+    // uncomment if you use TypeScript
+    //.enableTypeScriptLoader()
+
+    // uncomment if you use Sass/SCSS files
     //.enableSassLoader()
 
-    // uncomment if you use TypeScript
-    .enableTypeScriptLoader()
-
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
-
-   // .autoProvideVariables({
-     //   'window.jQuery': 'jquery'
-    //})
-    
-
-    // uncomment if you use API Platform Admin (composer req api-admin)
-    //.enableReactPreset()
-    //.addEntry('admin', './assets/js/admin.js')
+    .autoProvidejQuery()
 ;
 
 module.exports = Encore.getWebpackConfig();

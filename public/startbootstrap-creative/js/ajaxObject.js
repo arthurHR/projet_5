@@ -66,6 +66,13 @@ $(document).ready(function(){
     var formId = '#form_about';
     var reload_target = ' #about';
     updateAbout.init(eventItem, url, formId, reload_target);
+
+    sendMessage = Object.create(addItem);
+    var eventItem = $('#message_Modal');
+    var url = '/sendMessage';
+    var formId = '#form_message';
+    var reload_target = ' #message';
+    sendMessage.init(eventItem, url, formId, reload_target);
     
 });
 

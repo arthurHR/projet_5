@@ -8,6 +8,7 @@ window.DeleteSkill = function(id){
     deleteSkill.init(id, url, reload_target);
 };
 
+
 window.DeleteProject = function(id){
     deleteProject = Object.create(deleteItem);
     var url = ('/deleteProject');
@@ -16,15 +17,19 @@ window.DeleteProject = function(id){
 }; 
 
 
-
 window.UpdateSkill = function(id){
     var updateSkill = Object.create(updateItem);
     var eventItem = $('#skill_update_Modal');
     var url = '/updateSkill';
     var formId = '#form_skill_update';
-    var reload_target = ' #skills';;
-    updateSkill.init(eventItem, url, formId, reload_target, id);
+    var reload_target = ' #skills';
+  
+    updateSkill.init(eventItem, url, formId, id, reload_target); 
     
+    $(document).on('submit', formId , function(e){
+        updateSkill.submitForm(e); 
+        delete updateSkill.submitForm();
+    });             
 };
 
 window.UpdateProject = function(id){
@@ -33,7 +38,13 @@ window.UpdateProject = function(id){
     var url = '/updateProject';
     var formId = '#form_project_update';
     var reload_target = ' #projects';
-    updateProject.init(eventItem, url, formId, reload_target, id);             
+  
+    updateProject.init(eventItem, url, formId, id, reload_target); 
+    
+    $(document).on('submit', formId , function(e){
+        updateProject.submitForm(e); 
+        delete updateProject.submitForm();
+    });             
 };
 
 window.previewFile = function (input) { 
@@ -42,7 +53,12 @@ window.previewFile = function (input) {
 };
 
 
+ 
+
+
+
 $(document).ready(function(){
+
 
     addSkill = Object.create(addItem);
     var eventItem = $('#skill_add_Modal');
@@ -58,26 +74,12 @@ $(document).ready(function(){
     var reload_target = ' #projects';
     addProject.init(eventItem, url, formId, reload_target); 
 
-    updateHeader = Object.create(addItem);
-    var eventItem = $('#header_update_Modal');
-    var url = '/updateHeader';
-    var formId = '#form_header';
-    var reload_target = ' #header';
-    updateHeader.init(eventItem, url, formId, reload_target);
-
     updateAbout = Object.create(addItem);
     var eventItem = $('#about_update_Modal');
     var url = '/updateAbout';
     var formId = '#form_about';
     var reload_target = ' #about';
     updateAbout.init(eventItem, url, formId, reload_target);
-
-    sendMessage = Object.create(addItem);
-    var eventItem = $('#message_Modal');
-    var url = '/sendMessage';
-    var formId = '#form_message';
-    var reload_target = ' #message';
-    sendMessage.init(eventItem, url, formId, reload_target);
     
 });
 
@@ -114,6 +116,9 @@ var deleteItem =  {
     url : null, 
     reload_target : null,
 
+    /* --------------------------------------------*/
+    /* Méthode d'initialisation                    */
+    /*---------------------------------------------*/
     init : function (id, url, reload_target) 
     {
         this.id = id;
@@ -143,6 +148,7 @@ var deleteItem =  {
     },
 };
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -152,6 +158,9 @@ var addItem = {
     formId : null,
     reload_target : null,
 
+    /* --------------------------------------------*/
+    /* Méthode d'initialisation                    */
+    /*---------------------------------------------*/
     init : function (eventItem, url, formId, reload_target) 
     {
         this.eventItem = eventItem;
@@ -176,7 +185,6 @@ var addItem = {
             });
         });
     },
-
 
     submitForm : function () {
         var objet = this;
@@ -213,7 +221,10 @@ var updateItem = {
     id : null,
     reload_target : null,
 
-    init : function (eventItem, url, formId, reload_target, id)
+    /* --------------------------------------------*/
+    /* Méthode d'initialisation                    */
+    /*---------------------------------------------*/
+    init : function (eventItem, url, formId, id, reload_target) 
     {
         this.eventItem = eventItem;
         this.url = url;
@@ -233,18 +244,16 @@ var updateItem = {
                 method: 'post',
                 data: {'id': objet.id},
                 success: function(data) {
-                    modal.find('.modal-body').html(data);
-                    objet.submitForm();          
+                    modal.find('.modal-body').html(data);          
                 },
             });
-            
+        
     },
 
-    submitForm : function () {
+    submitForm : function (e) {
         var objet = this;
-        $(objet.formId).on('submit', function(e){
-            e.preventDefault();
             $form = $(e.target);
+            e.preventDefault();
             modal = objet.eventItem;
             var $submitButton = $form.find(':submit');
             $submitButton.html('<i class="fas fa-spinner fa-pulse"></i>');
@@ -264,7 +273,6 @@ var updateItem = {
                       $submitButton.prop('disabled', false);
                 }
             });
-        });
     }
 
    

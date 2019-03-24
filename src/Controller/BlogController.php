@@ -51,6 +51,7 @@ class BlogController extends AbstractController
             $form = $this->createForm(SkillsType::class, $skills, array(
                 'action' => $this->generateUrl($request->get('_route'))
             ));
+            dump($form);
 
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
@@ -65,7 +66,7 @@ class BlogController extends AbstractController
     } 
     
      /**
-     * @Route("/addProject" , name="addProject" )
+     * @Route("/addProject" , name="addProject", methods={"POST"} )
      */
     public function addProjectAction(Request $request)
     {
@@ -94,7 +95,6 @@ class BlogController extends AbstractController
     {             
 
             $entityManager = $this->getDoctrine()->getManager();
-            $skills = new Skills();
             $id = $request->get('id');
             $skills = $entityManager->getRepository(Skills::class)->find($id);
             $form = $this->createForm(SkillsType::class, $skills, array(
@@ -120,7 +120,6 @@ class BlogController extends AbstractController
     {             
 
             $entityManager = $this->getDoctrine()->getManager();
-            $projects = new Projects();
             $id = $request->get('id');
             $projects = $entityManager->getRepository(Projects::class)->find($id);
             $form = $this->createForm(ProjectsType::class, $projects, array(
@@ -178,7 +177,6 @@ class BlogController extends AbstractController
     {             
 
             $entityManager = $this->getDoctrine()->getManager();
-            $header = new Header();
             $header = $entityManager->getRepository(Header::class)->findAll();
             $form = $this->createForm(HeaderType::class, $header[0], array(
                 'action' => $this->generateUrl($request->get('_route'))
@@ -204,11 +202,11 @@ class BlogController extends AbstractController
     {             
 
             $entityManager = $this->getDoctrine()->getManager();
-            $about = new About();
             $about = $entityManager->getRepository(About::class)->findAll();
             $form = $this->createForm(AboutType::class, $about[0], array(
                 'action' => $this->generateUrl($request->get('_route'))
             ));
+            dump($form);
  
             $form->handleRequest($request);
 
@@ -225,15 +223,20 @@ class BlogController extends AbstractController
     
 
      /**
-     * @Route("/contact", name="contact")
+     * @Route("/sendMessage", name="sendMessage", methods={"POST"})
      */
-    public function index(Request $request, \Swift_Mailer $mailer)
+    public function sendMessageAction(Request $request, \Swift_Mailer $mailer)
     {
-        $form = $this->createForm(ContactType::class);
-
+ 
+        $message = array('name','from','content'); 
+        $form = $this->createForm(ContactType::class, $message, array(
+            'action' => $this->generateUrl($request->get('_route'))
+        ));
+        dump($form);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            dump($form);
             $contactFormData = $form->getData();
             $messageContent = $this->render('blog/views/email/email.html.twig', ['contactData' => $contactFormData]);
             $message = (new \Swift_Message('You Got Mail!'))
@@ -242,9 +245,8 @@ class BlogController extends AbstractController
                ->setReplyTo($contactFormData['from'])
                ->setBody($messageContent, 'text/html');
            $mailer->send($message);
+           return new Response(' #message');
            $this->addFlash('success', 'It sent!');
-        
-           return $this->redirectToRoute('home');
         }
 
         return $this->render('blog/views/forms/contact.html.twig', [
