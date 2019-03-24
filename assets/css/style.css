@@ -77,6 +77,10 @@ div.modal-dialog{
   box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
 }
 
+#messageButton {
+  margin-top: 50px;
+}
+
 @media (min-width: 992px){
   .navbar-expand-lg .navbar-collapse {
     margin-right: -50px

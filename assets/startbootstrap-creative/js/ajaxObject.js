@@ -1,4 +1,4 @@
-const $ = require('jquery');
+
 
 window.DeleteSkill = function(id){
     deleteSkill = Object.create(deleteItem);

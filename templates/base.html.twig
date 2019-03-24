@@ -49,8 +49,12 @@
  
         {% endfor %}
 
-        {% block javascripts %}          
-           {{ encore_entry_script_tags('mainPage') }}
+        {% block javascripts %} 
+            {% if is_granted('ROLE_ADMIN') %}
+                {{ encore_entry_script_tags('adminPage') }}
+            {% else %}
+                {{ encore_entry_script_tags('mainPage') }}
+            {% endif %}       
         {% endblock %}
          
 

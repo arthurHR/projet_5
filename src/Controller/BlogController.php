@@ -226,13 +226,11 @@ class BlogController extends AbstractController
      * @Route("/sendMessage", name="sendMessage", methods={"POST"})
      */
     public function sendMessageAction(Request $request, \Swift_Mailer $mailer)
-    {
- 
+    { 
         $message = array('name','from','content'); 
         $form = $this->createForm(ContactType::class, $message, array(
             'action' => $this->generateUrl($request->get('_route'))
         ));
-        dump($form);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

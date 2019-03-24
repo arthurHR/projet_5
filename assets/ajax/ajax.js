@@ -78,7 +78,6 @@ $(document).ready(function(){
     var formId = '#form_message';
     var reload_target = ' #message';
     sendMessage.init(eventItem, url, formId, reload_target);
-    
 });
 
 var modifyImage = {
@@ -266,8 +265,6 @@ var updateItem = {
             });
         });
     }
-
-   
 };
 
 
