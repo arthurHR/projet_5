@@ -8,8 +8,9 @@ class ProfileType extends AbstractType
 {
    public function buildForm(FormBuilderInterface $builder, array $options)
    {
-       $builder->add('last_name');
-       $builder->add('phone_number');
+       $builder->add('firstname');
+       $builder->add('lastname');
+       $builder->add('phonenumber');
        $builder->remove('current_password');
    }
    public function getParent()

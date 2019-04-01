@@ -24,6 +24,13 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string")
      */
+
+    protected $first_name;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+
     protected $last_name;
 
     /**
@@ -43,21 +50,21 @@ class User extends BaseUser
         return $this->id;
     }
 
+    public function getFirstName(): ?string
+    {
+        return $this->first_name;
+    }
+
+    public function setFirstName(string $first_name): self
+    {
+        $this->first_name = $first_name;
+
+        return $this;
+    }
+
     public function getLastName(): ?string
     {
         return $this->last_name;
-    }
-
-    public function getLast_Name(): ?string
-    {
-        return $this->last_name;
-    }
-
-    public function setLast_Name(string $last_name): self
-    {
-        $this->last_name = $last_name;
-
-        return $this;
     }
 
     public function setLastName(string $last_name): self
@@ -72,10 +79,6 @@ class User extends BaseUser
         return $this->phone_number;
     }
 
-    public function getPhone_Number(): ?string
-    {
-        return $this->phone_number;
-    }
 
     public function setPhoneNumber(string $phone_number): self
     {
