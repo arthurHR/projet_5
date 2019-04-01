@@ -27,15 +27,16 @@ use App\Entity\User;
 
 
 
+
 class BlogController extends AbstractController
 {
     
 
     /**
-     * @Route("/" , name="home")
+     * @Route("/user/{currentUser}" , name="home")
      */
-    public function mainAction(findData $findData) {
-    
+    public function mainAction(Request $request, $currentUser, findData $findData) {
+        dump($currentUser);
         $data = $findData->data;
         dump($data);
         return $this->render('blog/home.html.twig', ['data' => $data]);
