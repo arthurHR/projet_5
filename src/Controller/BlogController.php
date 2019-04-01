@@ -231,6 +231,7 @@ class BlogController extends AbstractController
         $form = $this->createForm(ContactType::class, $message, array(
             'action' => $this->generateUrl($request->get('_route'))
         ));
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -239,12 +240,13 @@ class BlogController extends AbstractController
             $messageContent = $this->render('blog/views/email/email.html.twig', ['contactData' => $contactFormData]);
             $message = (new \Swift_Message('You Got Mail!'))
                ->setFrom($contactFormData['from'])
-               ->setTo('richarthur123@gmail.com')
+               ->setTo('gimenez.melanie@outlook.com')
                ->setReplyTo($contactFormData['from'])
                ->setBody($messageContent, 'text/html');
            $mailer->send($message);
+           $this->addFlash('success', 'Votre message a bien été envoyé');
+
            return new Response(' #message');
-           $this->addFlash('success', 'It sent!');
         }
 
         return $this->render('blog/views/forms/contact.html.twig', [

@@ -19,6 +19,7 @@ Encore
      */
     .addEntry('mainPage', './assets/entry/main.js')
     .addEntry('adminPage', './assets/entry/admin.js')
+    .addEntry('securityPage', './assets/entry/security.js')
     //.addEntry('page2', './assets/js/page2.js')
 
     // will require an extra script tag for runtime.js

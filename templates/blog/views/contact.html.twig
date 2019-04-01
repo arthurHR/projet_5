@@ -4,13 +4,27 @@
 			<h2 class="mt-0">Contact</h2>
 			<hr class="divider my-4">
 			<p class="text-muted mb-5">N'hestitez pas à me contacter</p>
+			<div id="message">
+				{% for message in app.flashes('success') %}
+					<div class="alert alert-success">
+						{{ message }}
+					</div>
+				{% endfor %}
+			</div>
 		</div>
-		<div class="col-lg-8 text-center" id="message">
+		
+		<div class="col-lg-8 text-center">
 			<i class="fas fa-phone fa-3x mb-3 text-muted"></i>
 			<div>{{ admin.phonenumber }} </div>
 		</div>
+	
 		{% if not is_granted('ROLE_ADMIN') %}
 			{% include 'blog/views/modal/message.html.twig' %}
-    	{% endif %}
+    	{% else %}
+		<div class="col-lg-8 mx-auto text-center">
+			<a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary btn-xl">Modifier mes informations</a>
+    	</div>
+		{% endif %}
+
 	</div>
 </div>

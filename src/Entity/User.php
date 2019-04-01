@@ -48,6 +48,18 @@ class User extends BaseUser
         return $this->last_name;
     }
 
+    public function getLast_Name(): ?string
+    {
+        return $this->last_name;
+    }
+
+    public function setLast_Name(string $last_name): self
+    {
+        $this->last_name = $last_name;
+
+        return $this;
+    }
+
     public function setLastName(string $last_name): self
     {
         $this->last_name = $last_name;
@@ -56,6 +68,11 @@ class User extends BaseUser
     }
 
     public function getPhoneNumber(): ?string
+    {
+        return $this->phone_number;
+    }
+
+    public function getPhone_Number(): ?string
     {
         return $this->phone_number;
     }

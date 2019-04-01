@@ -81,6 +81,16 @@ div.modal-dialog{
   margin-top: 50px;
 }
 
+.dropdown-menu a {
+  margin-left: 15px;
+  text-decoration: none;
+  color : black;
+}
+
+.dropdown-menu a:hover {
+  color: #F05F40;
+}
+
 @media (min-width: 992px){
   .navbar-expand-lg .navbar-collapse {
     margin-right: -50px

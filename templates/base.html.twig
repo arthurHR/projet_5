@@ -36,7 +36,17 @@
                                         <i class="fas fa-user"></i>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="login">Se connecter</a>
+                                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                            <a href="{{ path('fos_user_security_logout') }}">Se déconnecter
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a href="{{ path('fos_user_profile_edit') }}">
+                                                {{ 'Modifier mon profil'|trans({}, 'FOSUserBundle') }}
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path('fos_user_security_login') }}">{{ 'Se connecter'|trans({}, 'FOSUserBundle') }}</a>
+                                        {% endif %}
+                                        
                                     </div>
                                 </div>
                             </li>

@@ -1,0 +1,12 @@
+<h1>Votre profil</h1>
+    <h2> Prénom </h2>
+    <p>{{ user.username }}</p>
+    <h2> Nom </h2>
+    <p>{{ user.last_name }}</p>
+    <h2> Email </h2>
+    <p>{{ user.email }}</p>
+    <h2> téléphone </h2>
+    <p>{{ user.phone_number }}</p>
+
+<a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary btn-xl">Modifier mes informations</a>
+
