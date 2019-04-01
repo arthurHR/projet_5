@@ -1,3 +1,68 @@
+/* general style*/
+.box
+{
+  margin-bottom: 100px;
+}
+
+button.delete {
+  background-color: #dd2518;
+}
+
+button.update {
+  background-color: #a18d1d;
+}
+
+
+.modal-body img {
+  width: 200px;
+  margin: 20px 0;
+}
+
+.custom-file-label::after{
+  content : 'Parcourir';
+}
+
+.custom-file-label{
+  overflow : hidden;
+}
+
+div.modal-dialog{
+  color : black;
+}
+
+/* navbar */
+
+
+#mainNav.navbar-shrink {
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+}
+
+#messageButton {
+  margin-top: 50px;
+}
+
+.dropdown-menu a {
+  margin-left: 15px;
+  text-decoration: none;
+  color : black;
+}
+
+.dropdown-menu a:hover {
+  color: #F05F40;
+}
+
+/*section about */
+
+#imageAbout {
+    vertical-align: middle;
+    width: 200px;
+    height: auto;
+    margin-bottom : 50px;
+    margin-top : 50px;
+}
+
+
+/* section skills */
 
 .skillsImg {
   width: 50%;
@@ -31,10 +96,7 @@ div.skill:hover button {
   opacity: 1;
 }
 
-.box
-{
-  margin-bottom: 100px;
-}
+/* section projects */
 
 div.project button {
   visibility: hidden;
@@ -47,49 +109,12 @@ div.project:hover button {
   opacity: 1;
 }
 
-button.delete {
-  background-color: #dd2518;
+/* section contact */
+
+#phoneNumber {
+  margin-bottom: 30px;
 }
 
-button.update {
-  background-color: #a18d1d;
-}
-
-
-.modal-body img {
-  width: 200px;
-  margin: 20px 0;
-}
-
-.custom-file-label::after{
-  content : 'Parcourir';
-}
-
-.custom-file-label{
-  overflow : hidden;
-}
-
-div.modal-dialog{
-  color : black;
-}
-
-#mainNav.navbar-shrink {
-  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
-}
-
-#messageButton {
-  margin-top: 50px;
-}
-
-.dropdown-menu a {
-  margin-left: 15px;
-  text-decoration: none;
-  color : black;
-}
-
-.dropdown-menu a:hover {
-  color: #F05F40;
-}
 
 @media (min-width: 992px){
   .navbar-expand-lg .navbar-collapse {

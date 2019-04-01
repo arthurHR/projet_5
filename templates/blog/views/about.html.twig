@@ -5,12 +5,8 @@
             <hr class="light my-4">
             <div id="about">
                 {% for about in data['about'] %}
-                    <img class="img-thumbnail" alt="Porfil_Image" src="{{ vich_uploader_asset(about, 'imageFile') }}"
-                        data-holder-rendered="true" style="vertical-align: middle;
-                        width: 200px;
-                        height: auto;
-                        margin-bottom : 50px;
-                        margin-top : 50px;">
+                    <img id="imageAbout" class="img-thumbnail" alt="Porfil_Image" src="{{ vich_uploader_asset(about, 'imageFile') }}"
+                        data-holder-rendered="true">
                     <p class="text-faded mb-4">{{ about.description }}</p>
                 {% endfor %}
             </div>

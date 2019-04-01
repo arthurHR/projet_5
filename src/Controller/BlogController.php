@@ -244,7 +244,7 @@ class BlogController extends AbstractController
                ->setReplyTo($contactFormData['from'])
                ->setBody($messageContent, 'text/html');
            $mailer->send($message);
-           $this->addFlash('success', 'Votre message a bien été envoyé');
+           $this->addFlash('successMessage', 'Votre message a bien été envoyé');
 
            return new Response(' #message');
         }
