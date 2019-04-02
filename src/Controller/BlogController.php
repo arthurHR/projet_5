@@ -33,11 +33,24 @@ class BlogController extends AbstractController
     /**
      * @Route("/" , name="main")
      */
-    public function mainAction(UserManagerInterface $userManager) {
+    public function mainAction(Request $request) {
+        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')){
+            $user = $this->container->get('security.token_storage')->getToken()->getUser();
+            return $this->redirectToRoute('home', ['currentUser' => $user]);
+        } else {
+            return $this->render('blog/views/main.html.twig');
+        }
+    }
+
+    /**
+     * @Route("/showUsers" , name="users")
+     */
+    public function showUsersAction(UserManagerInterface $userManager) {
         $users = $userManager->findUsers();
         dump($users);
         return $this->render('blog/views/users.html.twig', ['users' => $users]);
     }
+    
 
     /**
      * @Route("/user/{currentUser}" , name="home")

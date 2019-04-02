@@ -6,29 +6,22 @@
             {{ encore_entry_link_tags('securityPage') }}
         {% endblock %}
     </head>
-    <body>{#<a href="{{ path('home', {'currrentUser': user.username}) }} ">Retour à la page principale</a>#}
-        <a href="{{ path('fos_user_security_login') }}">Se connecter</a>
-        <a href="{{ path('fos_user_registration_register') }}">Créer un compte</a>
+    <body>
+        <a href="{{ path('main') }} ">Retour à la page principale</a>
         <div class="wrapper fadeInDown">
             <div id="formContent">
+            <h1>Cliquez sur un profil pour voir le blog complet</h1>
                 {% for user in users %}
-                    <a href="{{ path('home', {'currentUser': user.username}) }} ">
-                        <div class="col-lg-3 col-md-6 text-center">
-                            <div class="service-box mt-5 mx-auto" >
-                                <h3 class="mb-3">{{ user.username }}</h3>
-                                {% if is_granted('ROLE_ADMIN') %}
-                                
-                                {% endif %}
-                            </div>
-                        </div>  
+                    <a href="{{ path('home', {'currentUser': user.username}) }} "> 
+                        <h3>{{ user.username }}</h3>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        
+                        {% endif %}
                     </a> 
                 {% endfor %} 
             </div>
         </div>
         {% block body %}{% endblock %}
-
-    
-     
 
     </body>
 </html>

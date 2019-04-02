@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" lang="fr">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('securityPage') }}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+                <h1>Créer votre propre blog personalisé</h1>
+                <a href="{{ path('fos_user_security_login') }}">Se connecter</a>
+                <a href="{{ path('fos_user_registration_register') }}">Créer un compte</a>
+                <a href="{{ path('users') }}">Voir la liste des blogs</a>
+            </div>
+        </div>
+        {% block body %}{% endblock %}
+
+    </body>
+</html>
