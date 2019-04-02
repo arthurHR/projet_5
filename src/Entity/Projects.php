@@ -54,6 +54,11 @@ class Projects
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="projects")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,5 +126,17 @@ class Projects
     public function getImage()
     {
         return $this->image;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

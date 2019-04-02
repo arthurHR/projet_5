@@ -26,16 +26,15 @@ class findData
         /*$user = $userManager->findUserByUsername($username);*/
         $request = $this->request = $requestStack->getCurrentRequest();
         $userName = $request->get('currentUser');
-        dump($request);
         $user = $userManager->findUserByUsername($userName);
-        dump($user);
         $roles = "ROLE_SUPER_ADMIN";
         $repository=$em->getRepository(User::Class);
         $admin=$repository->findByRoles($roles);
         $header = $repoHeader->findAll();
         $about = $repoAbout->findAll();
-        $skills = $repoSkills->findAll();
-        $projects = $repoProjects->findAll();
+        $skills = $user->getSkills();
+        dump($skills);
+        $projects = $user->getProjects();
         $this->data = array(
             "user" => $user,
             "admin" => $admin,

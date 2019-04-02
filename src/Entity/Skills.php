@@ -44,6 +44,11 @@ class Skills
      */
     private $updatedAt;
 
+     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="skills")
+     */
+    private $user;
+
 
 
     public function getId(): ?int
@@ -90,4 +95,17 @@ class Skills
     {
         return $this->image;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 }
+

@@ -35,8 +35,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/user/{currentUser}" , name="home")
      */
-    public function mainAction(Request $request, $currentUser, findData $findData) {
-        dump($currentUser);
+    public function mainAction(Request $request, findData $findData) {
         $data = $findData->data;
         dump($data);
         return $this->render('blog/home.html.twig', ['data' => $data]);
@@ -52,12 +51,12 @@ class BlogController extends AbstractController
             $form = $this->createForm(SkillsType::class, $skills, array(
                 'action' => $this->generateUrl($request->get('_route'))
             ));
-            dump($form);
-
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
+                $user = $this->container->get('security.token_storage')->getToken()->getUser();
                 $entityManager->persist($skills);
+                $skills->setUser($user);
                 $entityManager->flush();
                 return new Response(' #skills');
             }
@@ -79,7 +78,9 @@ class BlogController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
+                $user = $this->container->get('security.token_storage')->getToken()->getUser();
                 $entityManager->persist($projects);
+                $projects->setUser($user);
                 $entityManager->flush();
                 return new Response(' #projects');
             }
