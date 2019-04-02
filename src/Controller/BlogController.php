@@ -30,12 +30,19 @@ use App\Entity\User;
 
 class BlogController extends AbstractController
 {
-    
+    /**
+     * @Route("/" , name="main")
+     */
+    public function mainAction(UserManagerInterface $userManager) {
+        $users = $userManager->findUsers();
+        dump($users);
+        return $this->render('blog/views/users.html.twig', ['users' => $users]);
+    }
 
     /**
      * @Route("/user/{currentUser}" , name="home")
      */
-    public function mainAction(Request $request, findData $findData) {
+    public function homeAction(Request $request, findData $findData) {
         $data = $findData->data;
         dump($data);
         return $this->render('blog/home.html.twig', ['data' => $data]);
