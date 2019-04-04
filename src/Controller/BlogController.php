@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\findData;
+use App\Services\findData;
+use App\Services\findEmail;
 use App\Entity\Skills;
 use App\Form\SkillsType;
 use App\Repository\SkillsRepository;
@@ -261,28 +262,27 @@ class BlogController extends AbstractController
      /**
      * @Route("/sendMessage", name="sendMessage", methods={"POST"})
      */
-    public function sendMessageAction(Request $request, \Swift_Mailer $mailer)
+    public function sendMessageAction(Request $request, \Swift_Mailer $mailer, findEmail $findEmail, UserManagerInterface $userManager)
     { 
+        $url = $request->headers->get('referer');
+        $emailUser = $findEmail->findEmail($userManager, $url);
         $message = array('name','from','content'); 
         $form = $this->createForm(ContactType::class, $message, array(
             'action' => $this->generateUrl($request->get('_route'))
         ));
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $contactFormData = $form->getData();
             $messageContent = $this->render('blog/views/email/email.html.twig', ['contactData' => $contactFormData]);
             $message = (new \Swift_Message('You Got Mail!'))
                ->setFrom($contactFormData['from'])
-               ->setTo('gimenez.melanie@outlook.com')
+               ->setTo($emailUser)
                ->setReplyTo($contactFormData['from'])
                ->setBody($messageContent, 'text/html');
            $mailer->send($message);
            $this->addFlash('successMessage', 'Votre message a bien été envoyé');
-
            return new Response(' #message');
         }
-
         return $this->render('blog/views/forms/contact.html.twig', [
             'form' => $form->createView(),
         ]);

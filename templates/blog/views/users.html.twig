@@ -7,7 +7,11 @@
         {% endblock %}
     </head>
     <body>
-        <a href="{{ path('main') }} ">Retour à la page principale</a>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <a href="{{ path('main') }} ">Retourner sur mon blog</a>
+        {% else %}
+            <a href="{{ path('main') }} ">Retourner à la page d'accueil </a>    
+        {% endif %}
         <div class="wrapper fadeInDown">
             <div id="formContent">
             <h1>Cliquez sur un profil pour voir le blog complet</h1>

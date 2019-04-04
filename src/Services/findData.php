@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Services;
 
 
 use App\Repository\SkillsRepository;
@@ -31,6 +31,7 @@ class findData
         $request = $this->request = $requestStack->getCurrentRequest();
         $userName = $request->get('currentUser');
         $user = $userManager->findUserByUsername($userName);
+        dump($user);
         $header = $user->getHeaders();
         $about = $user->getAbouts();
         if(count($header) < 1 || count($about) < 1){

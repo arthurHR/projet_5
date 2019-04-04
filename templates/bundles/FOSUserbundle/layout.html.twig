@@ -3,8 +3,13 @@
     {{ encore_entry_link_tags('securityPage') }}
 {% endblock %}
 <body>
+ {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <a href="{{ path('main') }} ">Retourner sur mon blog</a>
+{% else %}
+    <a href="{{ path('main') }} ">Retourner à la page d'accueil </a>    
+{% endif %}
 
-<a href="{{ path('main') }} ">Retour à la page principale</a>
+
     <div class="wrapper fadeInDown">
         <div id="formContent">
             {% block fos_user_content %}
