@@ -37,16 +37,16 @@
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                            <a href="{{ path('fos_user_security_logout') }}">Se déconnecter
-                                            </a>
+                                            <a href="{{ path('fos_user_security_logout') }}">Se déconnecter</a>
                                             <div class="dropdown-divider"></div>
-                                            <a href="{{ path('fos_user_profile_edit') }}">
-                                                {{ 'Modifier mon profil'|trans({}, 'FOSUserBundle') }}
-                                            </a>
+                                            <a href="{{ path('fos_user_profile_edit') }}">Modifier mon profil</a>
+                                            <div class="dropdown-divider"></div>
                                         {% else %}
                                             <a href="{{ path('fos_user_security_login') }}">Se connecter</a>
                                         {% endif %}
-                                        
+                                        {% if is_granted("ROLE_ADMIN") %}
+                                            <a href="{{ path('users') }}">Tous les profils</a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </li>
@@ -55,10 +55,10 @@
                 </div>
             </nav>
 
-            {% block body %}{% endblock %}
+        {% block body %}{% endblock %}
 
         {% block javascripts %} 
-            {% if is_granted('ROLE_ADMIN') %}
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
                 {{ encore_entry_script_tags('adminPage') }}
             {% else %}
                 {{ encore_entry_script_tags('mainPage') }}

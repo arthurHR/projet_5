@@ -26,8 +26,6 @@ use App\Entity\User;
 
 
 
-
-
 class BlogController extends AbstractController
 {
     /**
@@ -47,7 +45,6 @@ class BlogController extends AbstractController
      */
     public function showUsersAction(UserManagerInterface $userManager) {
         $users = $userManager->findUsers();
-        dump($users);
         return $this->render('blog/views/users.html.twig', ['users' => $users]);
     }
     
@@ -55,10 +52,28 @@ class BlogController extends AbstractController
     /**
      * @Route("/user/{currentUser}" , name="home")
      */
-    public function homeAction(Request $request, findData $findData) {
-        $data = $findData->data;
-        dump($data);
-        return $this->render('blog/home.html.twig', ['data' => $data]);
+    public function homeAction(Request $request, findData $findData, $currentUser) {
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER')){
+            $user = $this->container->get('security.token_storage')->getToken()->getUser();
+            if ($user == $currentUser or $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
+                $data = $findData->data;
+                return $this->render('blog/home.html.twig', ['data' => $data]);
+            } else {
+                return $this->redirectToRoute('fos_user_security_logout');
+            }
+        } else {
+            $data = $findData->data;
+            return $this->render('blog/home.html.twig', ['data' => $data]);
+        }
+    }
+
+      /**
+     * @Route("/deleteUser/{User}" , name="deleteUser")
+     */
+    public function deleteUserAction( $User, UserManagerInterface $userManager) {
+        $user = $userManager->findUserByUsername($User);
+        $userManager->deleteUser($user);
+        return $this->redirectToRoute('users');
     }
 
      /**
@@ -67,22 +82,22 @@ class BlogController extends AbstractController
     public function addSkillAction(Request $request)
     {
         
-            $skills = new Skills();
-            $form = $this->createForm(SkillsType::class, $skills, array(
-                'action' => $this->generateUrl($request->get('_route'))
-            ));
-            $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
-                $entityManager = $this->getDoctrine()->getManager();
-                $user = $this->container->get('security.token_storage')->getToken()->getUser();
-                $entityManager->persist($skills);
-                $skills->setUser($user);
-                $entityManager->flush();
-                return new Response(' #skills');
-            }
-            return $this->render('blog/views/forms/addSkill.html.twig', [
-                'form' => $form->createView(),
-            ]);   
+        $skills = new Skills();
+        $form = $this->createForm(SkillsType::class, $skills, array(
+            'action' => $this->generateUrl($request->get('_route'))
+        ));
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $user = $this->container->get('security.token_storage')->getToken()->getUser();
+            $entityManager->persist($skills);
+            $skills->setUser($user);
+            $entityManager->flush();
+            return new Response(' #skills');
+        }
+        return $this->render('blog/views/forms/addSkill.html.twig', [
+            'form' => $form->createView(),
+        ]);   
     } 
     
      /**
@@ -91,22 +106,22 @@ class BlogController extends AbstractController
     public function addProjectAction(Request $request)
     {
         
-            $projects = new Projects();
-            $form = $this->createForm(ProjectsType::class, $projects, array(
-                'action' => $this->generateUrl($request->get('_route'))
-            ));
-            $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
-                $entityManager = $this->getDoctrine()->getManager();
-                $user = $this->container->get('security.token_storage')->getToken()->getUser();
-                $entityManager->persist($projects);
-                $projects->setUser($user);
-                $entityManager->flush();
-                return new Response(' #projects');
-            }
-            return $this->render('blog/views/forms/addProject.html.twig', [
-                'form' => $form->createView(),
-            ]);   
+        $projects = new Projects();
+        $form = $this->createForm(ProjectsType::class, $projects, array(
+            'action' => $this->generateUrl($request->get('_route'))
+        ));
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $user = $this->container->get('security.token_storage')->getToken()->getUser();
+            $entityManager->persist($projects);
+            $projects->setUser($user);
+            $entityManager->flush();
+            return new Response(' #projects');
+        }
+        return $this->render('blog/views/forms/addProject.html.twig', [
+            'form' => $form->createView(),
+        ]);   
     } 
 
     
@@ -116,23 +131,23 @@ class BlogController extends AbstractController
     public function updateSkillAction(Request $request)
     {             
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $id = $request->get('id');
-            $skills = $entityManager->getRepository(Skills::class)->find($id);
-            $form = $this->createForm(SkillsType::class, $skills, array(
-                'action' => $this->generateUrl($request->get('_route'), array('id' => $id))
-            ));
+        $entityManager = $this->getDoctrine()->getManager();
+        $id = $request->get('id');
+        $skills = $entityManager->getRepository(Skills::class)->find($id);
+        $form = $this->createForm(SkillsType::class, $skills, array(
+            'action' => $this->generateUrl($request->get('_route'), array('id' => $id))
+        ));
 
-            $form->handleRequest($request);
+        $form->handleRequest($request);
 
-                if ($form->isSubmitted() && $form->isValid()) {
-                    $entityManager->persist($skills);
-                    $entityManager->flush();
-                    return new Response(' #skills');
-                }
-            return $this->render('blog/views/forms/updateSkill.html.twig', [
-                'form' => $form->createView(),
-            ]);   
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($skills);
+                $entityManager->flush();
+                return new Response(' #skills');
+            }
+        return $this->render('blog/views/forms/updateSkill.html.twig', [
+            'form' => $form->createView(),
+        ]);   
     } 
 
     /**
@@ -141,23 +156,23 @@ class BlogController extends AbstractController
     public function updateProjectAction(Request $request)
     {             
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $id = $request->get('id');
-            $projects = $entityManager->getRepository(Projects::class)->find($id);
-            $form = $this->createForm(ProjectsType::class, $projects, array(
-                'action' => $this->generateUrl($request->get('_route'), array('id' => $id))
-            ));
+        $entityManager = $this->getDoctrine()->getManager();
+        $id = $request->get('id');
+        $projects = $entityManager->getRepository(Projects::class)->find($id);
+        $form = $this->createForm(ProjectsType::class, $projects, array(
+            'action' => $this->generateUrl($request->get('_route'), array('id' => $id))
+        ));
 
-            $form->handleRequest($request);
+        $form->handleRequest($request);
 
-                if ($form->isSubmitted() && $form->isValid()) {
-                    $entityManager->persist($projects);
-                    $entityManager->flush();
-                    return new Response(' #projects');
-                }
-            return $this->render('blog/views/forms/updateProject.html.twig', [
-                'form' => $form->createView(),
-            ]);   
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($projects);
+                $entityManager->flush();
+                return new Response(' #projects');
+            }
+        return $this->render('blog/views/forms/updateProject.html.twig', [
+            'form' => $form->createView(),
+        ]);   
     } 
 
     /**
@@ -166,14 +181,14 @@ class BlogController extends AbstractController
     public function deleteSkillAction(Request $request)
     {
         if($request->isXmlHttpRequest()){
-                $id = $request->get('id');
-                $entityManager = $this->getDoctrine()->getManager();
+            $id = $request->get('id');
+            $entityManager = $this->getDoctrine()->getManager();
 
-                $skills = $entityManager->getRepository(Skills::class)->find($id);
+            $skills = $entityManager->getRepository(Skills::class)->find($id);
 
-                $entityManager->remove($skills);
-                $entityManager->flush();
-                return new Response(' #skills');               
+            $entityManager->remove($skills);
+            $entityManager->flush();
+            return new Response(' #skills');               
         }
     }
 
@@ -183,12 +198,12 @@ class BlogController extends AbstractController
     public function deleteProjectAction(Request $request)
     {
         if($request->isXmlHttpRequest()){
-                $id = $request->get('id');
-                $entityManager = $this->getDoctrine()->getManager();
-                $projects= $entityManager->getRepository(Projects::class)->find($id);
-                $entityManager->remove($projects);
-                $entityManager->flush();
-                return new Response(' #projects');               
+            $id = $request->get('id');
+            $entityManager = $this->getDoctrine()->getManager();
+            $projects= $entityManager->getRepository(Projects::class)->find($id);
+            $entityManager->remove($projects);
+            $entityManager->flush();
+            return new Response(' #projects');               
         }
     }
 
@@ -197,24 +212,23 @@ class BlogController extends AbstractController
      */
     public function updateHeaderAction(Request $request)
     {             
+        $userId = $this->container->get('security.token_storage')->getToken()->getUser()->getId();
+        $entityManager = $this->getDoctrine()->getManager();
+        $header = $entityManager->getRepository(Header::class)->findBy(array('user' => $userId));
+        $form = $this->createForm(HeaderType::class, $header[0], array(
+            'action' => $this->generateUrl($request->get('_route'))
+        ));
+        $form->handleRequest($request);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $header = $entityManager->getRepository(Header::class)->findAll();
-            $form = $this->createForm(HeaderType::class, $header[0], array(
-                'action' => $this->generateUrl($request->get('_route'))
-            ));
- 
-            $form->handleRequest($request);
-
-                if ($form->isSubmitted() && $form->isValid()) {
-                    $entityManager->persist($header[0]);
-                    $entityManager->flush();
-                    return new Response(' #header');
-                }
-                
-            return $this->render('blog/views/forms/updateHeader.html.twig', [
-                'form' => $form->createView(),
-            ]);   
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($header[0]);
+                $entityManager->flush();
+                return new Response(' #header');
+            }
+            
+        return $this->render('blog/views/forms/updateHeader.html.twig', [
+            'form' => $form->createView(),
+        ]);   
     } 
 
      /**
@@ -222,25 +236,25 @@ class BlogController extends AbstractController
      */
     public function updateAboutAction(Request $request)
     {             
+        $userId = $this->container->get('security.token_storage')->getToken()->getUser()->getId();
+        dump($userId);
+        $entityManager = $this->getDoctrine()->getManager();
+        $about = $entityManager->getRepository(About::class)->findBy(array('user' => $userId));
+        dump($about);
+        $form = $this->createForm(AboutType::class, $about[0], array(
+            'action' => $this->generateUrl($request->get('_route'))
+        ));
+        $form->handleRequest($request);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $about = $entityManager->getRepository(About::class)->findAll();
-            $form = $this->createForm(AboutType::class, $about[0], array(
-                'action' => $this->generateUrl($request->get('_route'))
-            ));
-            dump($form);
- 
-            $form->handleRequest($request);
-
-                if ($form->isSubmitted() && $form->isValid()) {
-                    $entityManager->persist($about[0]);
-                    $entityManager->flush();
-                    return new Response(' #about');
-                }
-                
-            return $this->render('blog/views/forms/updateAbout.html.twig', [
-                'form' => $form->createView(),
-            ]);   
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($about[0]);
+                $entityManager->flush();
+                return new Response(' #about');
+            }
+            
+        return $this->render('blog/views/forms/updateAbout.html.twig', [
+            'form' => $form->createView(),
+        ]);   
     } 
     
 
@@ -253,11 +267,9 @@ class BlogController extends AbstractController
         $form = $this->createForm(ContactType::class, $message, array(
             'action' => $this->generateUrl($request->get('_route'))
         ));
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form);
             $contactFormData = $form->getData();
             $messageContent = $this->render('blog/views/email/email.html.twig', ['contactData' => $contactFormData]);
             $message = (new \Swift_Message('You Got Mail!'))

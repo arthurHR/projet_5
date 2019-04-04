@@ -41,22 +41,22 @@ class User extends BaseUser
     protected $phone_number;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Skills", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Skills", mappedBy="user", cascade={"remove"})
      */
     private $skills;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\About", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\About", mappedBy="user", cascade={"remove"})
      */
     private $abouts;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Header", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Header", mappedBy="user", cascade={"remove"})
      */
     private $headers;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Projects", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Projects", mappedBy="user", cascade={"remove"})
      */
     private $projects;
 

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 
 class RegistrationType extends AbstractType
@@ -12,8 +13,9 @@ class RegistrationType extends AbstractType
    {
        $builder->add('firstname');
        $builder->add('lastname');
-       $builder->add('phonenumber');
+       $builder->add('phonenumber' , IntegerType::class);
    }
+
    public function getParent()
    {
        return 'FOS\UserBundle\Form\Type\RegistrationFormType';

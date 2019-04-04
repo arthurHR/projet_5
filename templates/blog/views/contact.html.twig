@@ -18,7 +18,7 @@
 			<div id="phoneNumber">{{ data.user.phonenumber }} </div>
 		</div>
 	
-		{% if not is_granted('ROLE_ADMIN') %}
+		{% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 			{% include 'blog/views/modal/message.html.twig' %}
     	{% else %}
 			<div class="col-lg-8 mx-auto text-center">

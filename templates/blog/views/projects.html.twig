@@ -25,14 +25,14 @@
                             </div>
                         </div>
                     </a>
-                    {% if is_granted('ROLE_ADMIN') %}
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
                         <button class="btn btn-danger btn-lg" onClick="DeleteProject({{ project.id }})">Supprimer</button>
                         <button class="btn btn-success btn-lg" onClick="UpdateProject({{ project.id }})">Modifier</button>
                     {% endif %}
                 </div>       
             {% endfor %} 
         </div>
-     {% if is_granted('ROLE_ADMIN') %}
+     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         {% include 'blog/views/modal/newProject.html.twig' %}
         {% include 'blog/views/modal/changeProject.html.twig' %}
     {% endif %}
