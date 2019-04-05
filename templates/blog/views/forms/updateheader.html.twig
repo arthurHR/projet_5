@@ -1,6 +1,7 @@
 {{ form_start(form, {'attr': {'id': 'form_header'}})}}
     {{ form_row(form.title, { 'label': 'Titre' }) }}
     {{ form_row(form.subtitle,{ 'label': 'Sous-titre' }) }}
+    {{ form_row(form.imageFile,{ 'label': 'Changer l\'image de fond' }) }}
 
     <button type="submit" name="submitheader" class="btn btn-primary" data-label="Enregistrer">
         Enregistrer

@@ -54,18 +54,18 @@ class BlogController extends AbstractController
      * @Route("/user/{currentUser}" , name="home")
      */
     public function homeAction(Request $request, findData $findData, $currentUser) {
-        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER')){
+       /* if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER')){
             $user = $this->container->get('security.token_storage')->getToken()->getUser();
-            if ($user == $currentUser or $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
+          if ($user == $currentUser or $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){*/
                 $data = $findData->data;
                 return $this->render('blog/home.html.twig', ['data' => $data]);
-            } else {
+           /* } else {
                 return $this->redirectToRoute('fos_user_security_logout');
             }
         } else {
             $data = $findData->data;
             return $this->render('blog/home.html.twig', ['data' => $data]);
-        }
+        }*/
     }
 
       /**

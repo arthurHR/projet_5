@@ -50,16 +50,21 @@ class findData
     }
 
     public function setDefaultContent ($user, $entityManager) {
-        $newHeader = new Header();
-        $newHeader->setTitle('Bienvenue sur votre Blog')
-                  ->setSubtitle('Commencer à le personnaliser');
-        $user->addHeader($newHeader);
         $newAbout = new About();
-        $filename = 'C:\xampp\htdocs\blog\public\images\about\how-to-create-a-blog.png';
-        $file = new UploadedFile($filename, $filename, null, false, true);
+        $fileAbout = 'C:\xampp\htdocs\blog\public\images\about\how-to-create-a-blog.png';
+        $imageAbout = new UploadedFile($fileAbout, $fileAbout, null, false, true);
         $newAbout->setDescription('Personnaliser votre profil') 
-                 ->setImageFile($file);            
+                 ->setImageFile($imageAbout);            
         $user->addAbout($newAbout);
+
+        $newHeader = new Header();
+        $fileHeader = 'C:\xampp\htdocs\blog\public\images\header\header.jpg';
+        $imageHeader = new UploadedFile($fileHeader, $fileHeader, null, false, true);
+        $newHeader->setTitle('Bienvenue sur votre Blog')
+                  ->setSubtitle('Commencer à le personnaliser')
+                  ->setImageFile($imageHeader);
+        $user->addHeader($newHeader);
+
         $entityManager->persist($newHeader);
         $entityManager->persist($newAbout);
         $entityManager->flush();
