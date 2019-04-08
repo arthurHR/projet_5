@@ -38,7 +38,6 @@ class BlogController extends AbstractController
             return $this->redirectToRoute('home', ['currentUser' => $user]);
         } else {
             $userInfos = $headerRepo->findAll();
-            dump($userInfos);
             return $this->render('blog/views/main.html.twig', ['userInfos' => $userInfos]);
         }
     }
@@ -46,9 +45,9 @@ class BlogController extends AbstractController
     /**
      * @Route("/showUsers" , name="users")
      */
-    public function showUsersAction(UserManagerInterface $userManager) {
-        $users = $userManager->findUsers();
-        return $this->render('blog/views/users.html.twig', ['users' => $users]);
+    public function showUsersAction(HeaderRepository $headerRepo) {
+        $userInfos = $headerRepo->findAll();
+        return $this->render('blog/views/users.html.twig', ['userInfos' => $userInfos]);
     }
     
 

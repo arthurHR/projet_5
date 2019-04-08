@@ -133,7 +133,6 @@ div.project:hover button {
 /* mainPage */
 
 #mainNav a {
-  color : #F05F40;
   text-decoration: none;
 }
 
@@ -158,7 +157,7 @@ div.project:hover button {
   color: white;
 }
 
-#showUsers{
+.mainButton{
   margin-top: 10%;
   background-color: white;
   color: #F05F40;
