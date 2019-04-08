@@ -32,12 +32,14 @@ class BlogController extends AbstractController
     /**
      * @Route("/" , name="main")
      */
-    public function mainAction(Request $request) {
+    public function mainAction(Request $request , HeaderRepository $headerRepo) {
         if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')){
             $user = $this->container->get('security.token_storage')->getToken()->getUser();
             return $this->redirectToRoute('home', ['currentUser' => $user]);
         } else {
-            return $this->render('blog/views/main.html.twig');
+            $userInfos = $headerRepo->findAll();
+            dump($userInfos);
+            return $this->render('blog/views/main.html.twig', ['userInfos' => $userInfos]);
         }
     }
 

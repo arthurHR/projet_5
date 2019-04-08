@@ -6,29 +6,33 @@ $(document).ready(function(){
     var eventItem = $('#skill_add_Modal');
     var url = '/addSkill';
     var formId = '#form_skill';
+    var load = ' #skillLoad';
     var reload_target = ' #skills';
-    addSkill.init(eventItem, url, formId, reload_target);
+    addSkill.init(eventItem, url, formId, reload_target, load);
 
     addProject = Object.create(addItem);
     var eventItem = $('#project_add_Modal');
     var url = '/addProject';
     var formId = '#form_project';
+    var load = ' #projectsLoad';
     var reload_target = ' #projects';
-    addProject.init(eventItem, url, formId, reload_target); 
+    addProject.init(eventItem, url, formId, reload_target, load); 
 
     updateHeader = Object.create(addItem);
     var eventItem = $('#header_update_Modal');
     var url = '/updateHeader';
     var formId = '#form_header';
     var reload_target = ' #header';
-    updateHeader.init(eventItem, url, formId, reload_target);
+    var load = ' #headerLoad';
+    updateHeader.init(eventItem, url, formId, reload_target, load);
 
     updateAbout = Object.create(addItem);
     var eventItem = $('#about_update_Modal');
     var url = '/updateAbout';
     var formId = '#form_about';
     var reload_target = ' #about';
-    updateAbout.init(eventItem, url, formId, reload_target);
+    var load = ' #aboutLoad';
+    updateAbout.init(eventItem, url, formId, reload_target, load);
 
 });
 
@@ -37,13 +41,15 @@ var addItem = {
     url : null,
     formId : null,
     reload_target : null,
+    load : null,
 
-    init : function (eventItem, url, formId, reload_target) 
+    init : function (eventItem, url, formId, reload_target, load) 
     {
         this.eventItem = eventItem;
         this.url = url;
         this.formId = formId;
         this.reload_target = reload_target;
+        this.load = load;
         this.getForm();
         this.submitForm();   
     },
@@ -78,7 +84,7 @@ var addItem = {
                 success: function(data) {
                     if (data == objet.reload_target){
                         modal.modal('toggle');
-                        $(objet.reload_target).load(objet.reload_target);
+                        $(objet.load).load(objet.reload_target);
                     } else {
                         alert('Un problème est survenu durant le chargement');
                     };

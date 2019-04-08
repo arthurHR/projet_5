@@ -3,12 +3,14 @@
         <div class="col-lg-8 mx-auto text-center">
             <h2 class="section-heading text-white">A propos</h2>
             <hr class="light my-4">
-            <div id="about">
-                {% for about in data['about'] %}
-                    <img id="imageAbout" class="img-thumbnail" alt="Porfil_Image" src="{{ vich_uploader_asset(about, 'imageFile') }}"
-                        data-holder-rendered="true">
-                    <p class="text-faded mb-4">{{ about.description }}</p>
-                {% endfor %}
+            <div id='aboutLoad'>
+                <div id="about">
+                    {% for about in data['about'] %}
+                        <img id="imageAbout" class="img-thumbnail" alt="Porfil_Image" src="{{ vich_uploader_asset(about, 'imageFile') }}"
+                            data-holder-rendered="true">
+                        <p class="text-faded mb-4">{{ about.description }}</p>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

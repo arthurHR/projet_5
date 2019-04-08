@@ -5,7 +5,7 @@ require('../startbootstrap-creative/vendor/fontawesome-free/css/all.min.css');
 require('../startbootstrap-creative/vendor/magnific-popup/magnific-popup.css');
 require('../startbootstrap-creative/css/creative.min.css');
 require('../css/style.css');
-
+require('../images/creer-portfolio.png');
 
 require('../startbootstrap-creative/vendor/jquery/jquery.js');
 require('../startbootstrap-creative/vendor/bootstrap/js/bootstrap.bundle.js');

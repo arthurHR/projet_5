@@ -9,9 +9,9 @@
     </div>
 </div>
     <div class="container-fluid p-0">
-        <div class="row no-gutters" id="projects">
+        <div class="row no-gutters" id="projectsLoad">
             {% for project in data['projects'] %}
-                <div class="col-lg-4 col-sm-6 text-center project">
+                <div class="col-lg-4 col-sm-6 text-center project" id="projects">
                     <a class="portfolio-box" href="{{ project.link }}">
                         <img class="img-fluid" src="{{ vich_uploader_asset(project, 'imageFile') }}" alt="{{ project.title }}">
                         <div class="portfolio-box-caption">

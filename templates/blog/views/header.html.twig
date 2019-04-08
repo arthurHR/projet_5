@@ -1,5 +1,5 @@
 {# background-image: url("../img/header.jpg"); #}
-<div id = "content">                
+<div id = "headerLoad">                
     {% for header in data['header'] %}
     <header id = "header" class="masthead text-center text-white d-flex" style="background-image : url({{ vich_uploader_asset(header, 'imageFile') }})">
         <div class="container my-auto">
@@ -17,9 +17,11 @@
             </div>
         </div>
     </header>
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user == data.user.username %}
-            {% include 'blog/views/modal/changeHeader.html.twig' %}
-        {% else %}
-            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#projectSection">Voir les projets</a>
-        {% endif %}
 </div>
+ {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user == data.user.username %}
+    {% include 'blog/views/modal/changeHeader.html.twig' %}
+{% else %}
+    <div class="col-lg-8 mx-auto text-center">
+        <a id= "showProjects" class="btn btn-primary btn-xl js-scroll-trigger" href="#projectSection">Voir les projets</a>
+    </div>
+{% endif %}

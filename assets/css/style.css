@@ -51,6 +51,21 @@ div.modal-dialog{
   color: #F05F40;
 }
 
+/*section header */
+
+#showProjects {
+  margin-top: -250px;
+}
+
+#updateHeaderButton {
+  margin-top: -250px;
+}
+
+#headerMain {
+  background-image : url("../images/header.jpg");
+
+}
+
 /*section about */
 
 #imageAbout {
@@ -115,6 +130,39 @@ div.project:hover button {
   margin-bottom: 30px;
 }
 
+/* mainPage */
+
+#mainNav a {
+  color : #F05F40;
+  text-decoration: none;
+}
+
+#headerMain h1 {
+  color : #47556b;
+}
+
+#headerMain h1 strong {
+  color : #F05F40;
+}
+
+#headerMain h2 {
+  color : #F05F40;
+  margin-bottom: 10%;
+}
+
+#listUser {
+  margin-top: 100px; 
+}
+
+#showUsers:hover {
+  color: white;
+}
+
+#showUsers{
+  margin-top: 10%;
+  background-color: white;
+  color: #F05F40;
+}
 
 @media (min-width: 992px){
   .navbar-expand-lg .navbar-collapse {

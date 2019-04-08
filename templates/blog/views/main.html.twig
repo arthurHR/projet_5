@@ -1,21 +1,74 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" lang="fr">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('securityPage') }}
-        {% endblock %}
-    </head>
-    <body>
-        <div class="wrapper fadeInDown">
-            <div id="formContent">
-                <h1>Créer votre propre blog personalisé</h1>
-                <a href="{{ path('fos_user_security_login') }}">Se connecter</a>
-                <a href="{{ path('fos_user_registration_register') }}">Créer un compte</a>
-                <a href="{{ path('users') }}">Voir la liste des blogs</a>
-            </div>
-        </div>
-        {% block body %}{% endblock %}
+{% extends 'base.html.twig' %}
 
-    </body>
-</html>
+    {% block body %}
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+            <div class="container">
+                <a id="titleMain" class="navbar-brand js-scroll-trigger" href="#page-top">CYP</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                            <a href="{{ path('fos_user_security_login') }}"><strong>Se connecter</strong></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>               
+        <header id = "headerMain" class="masthead text-center text-white d-flex" style="background-image : url({{ asset("build/images/creer-portfolio.png") }})">
+            <div class="container my-auto" >
+                <div class="row">
+                        <div class="col-lg-10 mx-auto">
+                            <h1>
+                                <strong>C</strong>reate <strong>Y</strong>our <strong>P</strong>orfolio
+                            </h1>
+                            <hr>
+                        </div>
+                        <div class="col-lg-8 mx-auto">
+                            <h2>Besoin de présenter vos compétences et vos projets en ligne ? Inscrivez vous gratuitement sur CYP et créer votre portfolio personalisé !</h2>
+                        </div>
+                        <div class="col-lg-8 mx-auto">
+                            <a class="btn btn-primary btn-xl js-scroll-trigger" href="{{ path('fos_user_registration_register') }}">Créer un compte</a>
+                        </div>
+                        
+                </div>
+            </div>
+        </header>
+        <section class="bg-primary">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading text-white">Les personnes qui ont essayés CYP</h2>
+                        <hr class="light my-4">
+
+                    </div>
+                </div>
+            </div>
+            <div class="container " id="listUser">
+                <div class="row justify-content-around">
+                    {% for info in userInfos |slice(0, 2) %} 
+                        <div class="col-md-4">
+                            <div class="card">
+                                <img class="card-img-top" src="{{ vich_uploader_asset(info, 'imageFile') }}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title border-bottom pb-3">{{ info.user.firstname }} {{ info.user.lastname }}</h5>
+                                    <strong>{{ info.title }}</strong>
+                                    <p class="card-text">{{ info.subtitle }}</p>
+                                    <a href="{{ path('home', {'currentUser': info.user.username}) }}" class="btn btn-sm btn-primary float-right">Voir le portfolio<i class="fas fa-angle-double-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                   <div class="container my-auto text-center" > 
+                        <div class="col-lg-8 mx-auto">
+                            <a id ="showUsers" class="btn btn-primary btn-xl js-scroll-trigger" href="{{ path('users') }}">Voir tous les profils</a>
+                        </div>
+                    </div>       
+                </div>
+            </div>
+        <section>
+    {% endblock %}
+
+  

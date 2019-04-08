@@ -6,8 +6,9 @@ window.UpdateSkill = function(id){
     var eventItem = $('#skill_update_Modal');
     var url = '/updateSkill';
     var formId = '#form_skill_update';
-    var reload_target = ' #skills';;
-    updateSkill.init(eventItem, url, formId, reload_target, id);
+    var reload_target = ' #skills';
+    var load = ' #skillLoad';
+    updateSkill.init(eventItem, url, formId, reload_target, id, load);
     
 };
 
@@ -17,7 +18,8 @@ window.UpdateProject = function(id){
     var url = '/updateProject';
     var formId = '#form_project_update';
     var reload_target = ' #projects';
-    updateProject.init(eventItem, url, formId, reload_target, id);             
+    var load = ' #projectsLoad';
+    updateProject.init(eventItem, url, formId, reload_target, id, load);             
 };
 
 var updateItem = {
@@ -26,14 +28,16 @@ var updateItem = {
     formId : null,
     id : null,
     reload_target : null,
+    load : null,
 
-    init : function (eventItem, url, formId, reload_target, id)
+    init : function (eventItem, url, formId, reload_target, id, load)
     {
         this.eventItem = eventItem;
         this.url = url;
         this.formId = formId;
         this.id = id;
         this.reload_target = reload_target;
+        this.load = load;
         this.getForm();
     },
 
@@ -68,7 +72,7 @@ var updateItem = {
                 success: function(data) {
                     if (data == objet.reload_target){
                         modal.modal('toggle');
-                        $(objet.reload_target).load(objet.reload_target);
+                        $(objet.load).load(objet.reload_target);
                     } else {
                         alert('Un problème est survenu durant le chargement');
                     };
