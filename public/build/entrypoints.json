@@ -1,0 +1,28 @@
+{
+  "entrypoints": {
+    "mainPage": {
+      "js": [
+        "/build/runtime.js",
+        "/build/mainPage.js"
+      ],
+      "css": [
+        "/build/mainPage.css"
+      ]
+    },
+    "adminPage": {
+      "js": [
+        "/build/runtime.js",
+        "/build/adminPage.js"
+      ]
+    },
+    "securityPage": {
+      "js": [
+        "/build/runtime.js",
+        "/build/securityPage.js"
+      ],
+      "css": [
+        "/build/securityPage.css"
+      ]
+    }
+  }
+}
