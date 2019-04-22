@@ -32,13 +32,13 @@
         "symfony/yaml": "4.2.*",
         "doctrine/doctrine-fixtures-bundle": "^3.1",
         "symfony/profiler-pack": "*",
-        "vich/uploader-bundle": "^1.8"
-    },
-    "require-dev": {
+        "vich/uploader-bundle": "^1.8",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/test-pack": "*",
         "symfony/web-server-bundle": "4.2.*"
+    },
+    "require-dev": {
     },
     "config": {
         "preferred-install": {
