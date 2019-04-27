@@ -1,5 +1,5 @@
 swiftmailer:
-    transport:        smtp
+    transport:        smtp.gmail.com
     username:         arthur
     password:         pirrouette93
     host:             richarthur123@gmail.com
