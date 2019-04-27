@@ -19,7 +19,7 @@
     </header>
 </div>
  {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user == data.user.username %}
-    {% include 'blog/views/modal/changeHeader.html.twig' %}
+    {% include 'blog/views/modal/changeheader.html.twig' %}
 {% else %}
     <div class="col-lg-8 mx-auto text-center">
          <a id= "showProjects" class="btn btn-primary btn-xl js-scroll-trigger" href="#projectSection">Voir les projets</a>
