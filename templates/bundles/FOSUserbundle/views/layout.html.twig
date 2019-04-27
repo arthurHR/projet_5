@@ -1,0 +1,22 @@
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('securityPage') }}
+{% endblock %}
+<body>
+ {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <a href="{{ path('main') }} ">Retourner sur mon porfolio</a>
+{% else %}
+    <a href="{{ path('main') }} ">Retourner à la page d'accueil </a>    
+{% endif %}
+
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
+    </div>
+</body>
+
+
+ 

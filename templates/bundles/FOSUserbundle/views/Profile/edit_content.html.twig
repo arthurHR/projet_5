@@ -1,0 +1,13 @@
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+<h1>Modifier mon profil</h1>
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+    {{ form_row(form.username , { 'label': 'Pseudo' }) }}
+    {{ form_row(form.firstname , { 'label': 'Prénom' }) }}
+    {{ form_row(form.lastname, { 'label': 'Nom' }) }}
+    {{ form_row(form.email, { 'label': 'Adresse email' }) }}
+    {{ form_row(form.phonenumber, { 'label': 'Numéro de téléphone' }) }}
+    <input type="submit"></input>
+{{ form_end(form) }}

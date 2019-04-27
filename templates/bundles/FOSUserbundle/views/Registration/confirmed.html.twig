@@ -1,0 +1,15 @@
+
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('securityPage') }}
+{% endblock %}
+<body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <h1>Bravo ! Vous venez de créer votre profil</h1>
+            <a href="{{ path('main') }} ">Accéder à votre blog</a>
+            <a href="{{ path('fos_user_profile_edit') }}">Modifier à nouveau votre profil</a>    
+        </div>
+    </div>
+</body>
