@@ -240,10 +240,8 @@ class BlogController extends AbstractController
     public function updateAboutAction(Request $request)
     {             
         $userId = $this->container->get('security.token_storage')->getToken()->getUser()->getId();
-        dump($userId);
         $entityManager = $this->getDoctrine()->getManager();
         $about = $entityManager->getRepository(About::class)->findBy(array('user' => $userId));
-        dump($about);
         $form = $this->createForm(AboutType::class, $about[0], array(
             'action' => $this->generateUrl($request->get('_route'))
         ));
@@ -279,10 +277,10 @@ class BlogController extends AbstractController
             $contactFormData = $form->getData();
             $messageContent = $this->render('blog/views/email/email.html.twig', ['contactData' => $contactFormData]);
             $result = $mgClient->sendMessage($domain, array(
-                'from'    =>  $emailUser,
+                'from'    =>  $contactFormData['from'],
                 'to'      =>  $emailUser,
                 'subject' => 'CreateYourPortfolio',
-                'text'    => 'Vous avez reçu un message provenant de Create your portfolio'
+                'html'    =>  $messageContent
             ));
            $this->addFlash('successMessage', 'Votre message a bien été envoyé');
            return new Response(' #message');
