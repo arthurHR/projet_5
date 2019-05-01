@@ -280,7 +280,7 @@ class BlogController extends AbstractController
                 'from'    =>  $contactFormData['from'],
                 'to'      =>  $emailUser,
                 'subject' => 'CreateYourPortfolio',
-                'text'    =>  $contactFormData['content']
+                'text'    =>  $contactFormData['message']
             ));
            $this->addFlash('successMessage', 'Votre message a bien été envoyé');
            return new Response(' #message');
