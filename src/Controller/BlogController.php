@@ -266,8 +266,8 @@ class BlogController extends AbstractController
      */
     public function sendMessageAction(Request $request, findEmail $findEmail, UserManagerInterface $userManager)
     { 
-        $mgClient = new Mailgun('e5893aaf205e529fe8f860c4df40c55a-dc5f81da-cccad49');
-        $domain = "createyourportfolio.herokuapp.com";
+        $mgClient = new Mailgun('e5893aaf205e529fe8f860c4df40c55a-dc5f81da-cccad496');
+        $domain = "sandbox0d7816520a324f3283d0c987b731608b.mailgun.org";
         $url = $request->headers->get('referer');
         $emailUser = $findEmail->findEmail($userManager, $url);
         $message = array('name','from','content'); 
@@ -279,7 +279,7 @@ class BlogController extends AbstractController
             $contactFormData = $form->getData();
             $messageContent = $this->render('blog/views/email/email.html.twig', ['contactData' => $contactFormData]);
             $result = $mgClient->sendMessage($domain, array(
-                'from'    => 'Excited User <message@createyourportfolio.herokuapp.com>',
+                'from'    => 'Excited User <sandbox0d7816520a324f3283d0c987b731608b.mailgun.org>',
                 'to'      =>  $emailUser,
                 'subject' => 'CreateYourPortfolio',
                 'text'    => 'Vous avez reçu un message provenant de Create your portfolio'
