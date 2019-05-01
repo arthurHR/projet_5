@@ -264,7 +264,7 @@ class BlogController extends AbstractController
      /**
      * @Route("/sendMessage", name="sendMessage", methods={"POST"})
      */
-    public function sendMessageAction(Request $request, \Swift_Mailer $mailer, findEmail $findEmail, UserManagerInterface $userManager)
+    public function sendMessageAction(Request $request, \Mailgun $Mailgun, findEmail $findEmail, UserManagerInterface $userManager)
     { 
         $mgClient = new Mailgun('e5893aaf205e529fe8f860c4df40c55a-dc5f81da-cccad49');
         $domain = "createyourportfolio.herokuapp.com";
@@ -282,8 +282,7 @@ class BlogController extends AbstractController
                 'from'    => 'Excited User <message@createyourportfolio.herokuapp.com>',
                 'to'      =>  $emailUser,
                 'subject' => 'CreateYourPortfolio',
-                'text'    => 'Vous avez reçu un message provenant de Create your portfolio',
-                'html'    => $messageContent
+                'text'    => 'Vous avez reçu un message provenant de Create your portfolio'
             ));
            $this->addFlash('successMessage', 'Votre message a bien été envoyé');
            return new Response(' #message');
