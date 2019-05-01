@@ -264,7 +264,7 @@ class BlogController extends AbstractController
      /**
      * @Route("/sendMessage", name="sendMessage", methods={"POST"})
      */
-    public function sendMessageAction(Request $request, \Mailgun $Mailgun, findEmail $findEmail, UserManagerInterface $userManager)
+    public function sendMessageAction(Request $request, findEmail $findEmail, UserManagerInterface $userManager)
     { 
         $mgClient = new Mailgun('e5893aaf205e529fe8f860c4df40c55a-dc5f81da-cccad49');
         $domain = "createyourportfolio.herokuapp.com";
