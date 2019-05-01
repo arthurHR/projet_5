@@ -279,7 +279,7 @@ class BlogController extends AbstractController
             $contactFormData = $form->getData();
             $messageContent = $this->render('blog/views/email/email.html.twig', ['contactData' => $contactFormData]);
             $result = $mgClient->sendMessage($domain, array(
-                'from'    => 'Excited User <sandbox0d7816520a324f3283d0c987b731608b.mailgun.org>',
+                'from'    =>  $emailUser,
                 'to'      =>  $emailUser,
                 'subject' => 'CreateYourPortfolio',
                 'text'    => 'Vous avez reçu un message provenant de Create your portfolio'
