@@ -278,7 +278,7 @@ class BlogController extends AbstractController
             //$messageContent = $this->render('blog/views/email/email.html.twig', ['contactData' => $contactFormData]);
             $result = $mgClient->sendMessage($domain, array(
                 'from'    =>  $contactFormData['from'],
-                'to'      =>  $emailUser,
+                'to'      =>  'maxime.rungette@gmail.com',
                 'subject' => 'CreateYourPortfolio',
                 'text'    =>  $contactFormData['message']
             ));
