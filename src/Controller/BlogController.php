@@ -275,7 +275,7 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $contactFormData = $form->getData();
-            $messageContent = $this->render('blog/views/email/email.html.twig', ['contactData' => $contactFormData]);
+            //$messageContent = $this->render('blog/views/email/email.html.twig', ['contactData' => $contactFormData]);
             $result = $mgClient->sendMessage($domain, array(
                 'from'    =>  $contactFormData['from'],
                 'to'      =>  $emailUser,
