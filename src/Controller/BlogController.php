@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\UserBundle\Model\UserManagerInterface;
 use App\Entity\User;
+use Mailgun\Mailgun;
 
 
 
@@ -265,6 +266,8 @@ class BlogController extends AbstractController
      */
     public function sendMessageAction(Request $request, \Swift_Mailer $mailer, findEmail $findEmail, UserManagerInterface $userManager)
     { 
+        $mgClient = new Mailgun('e5893aaf205e529fe8f860c4df40c55a-dc5f81da-cccad49');
+        $domain = "createyourportfolio.herokuapp.com";
         $url = $request->headers->get('referer');
         $emailUser = $findEmail->findEmail($userManager, $url);
         $message = array('name','from','content'); 
@@ -275,17 +278,26 @@ class BlogController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $contactFormData = $form->getData();
             $messageContent = $this->render('blog/views/email/email.html.twig', ['contactData' => $contactFormData]);
-            $message = (new \Swift_Message('You Got Mail!'))
-               ->setFrom($contactFormData['from'])
-               ->setTo($emailUser)
-               ->setReplyTo($contactFormData['from'])
-               ->setBody($messageContent, 'text/html');
-           $mailer->send($message);
+            $result = $mgClient->sendMessage($domain, array(
+                'from'    => 'Excited User <message@createyourportfolio.herokuapp.com>',
+                'to'      =>  $emailUser,
+                'subject' => 'CreateYourPortfolio',
+                'text'    => 'Vous avez reçu un message provenant de Create your portfolio',
+                'html'    => $messageContent
+            ));
            $this->addFlash('successMessage', 'Votre message a bien été envoyé');
            return new Response(' #message');
         }
         return $this->render('blog/views/forms/contact.html.twig', [
             'form' => $form->createView(),
         ]);
+
+        
+       /* $message = (new \Swift_Message('You Got Mail!'))
+        ->setFrom($contactFormData['from'])
+        ->setTo($emailUser)
+        ->setReplyTo($contactFormData['from'])
+        ->setBody($messageContent, 'text/html');
+    $mailer->send($message);*/
     }
 }
