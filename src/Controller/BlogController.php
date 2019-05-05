@@ -229,7 +229,7 @@ class BlogController extends AbstractController
                 return new Response(' #header');
             }
             
-        return $this->render('blog/views/forms/updateHeader.html.twig', [
+        return $this->render('blog/views/forms/updateheader.html.twig', [
             'form' => $form->createView(),
         ]);   
     } 
