@@ -58,7 +58,7 @@ class findData
         $user->addAbout($newAbout);
 
         $newHeader = new Header();
-        $fileHeader = ($_SERVER['DOCUMENT_ROOT']  . '/images/header/header.jpg');
+        $fileHeader = ($_SERVER['DOCUMENT_ROOT']  . '/images/header/creer-portfolio.png');
         $imageHeader = new UploadedFile($fileHeader, $fileHeader, null, false, true);
         $newHeader->setTitle('Bienvenue sur votre Blog')
                   ->setSubtitle('Commencer à le personnaliser')
