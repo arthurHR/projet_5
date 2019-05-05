@@ -51,14 +51,14 @@ class findData
 
     public function setDefaultContent ($user, $entityManager) {
         $newAbout = new About();
-        $fileAbout = '..\..\public\images\about\how-to-create-a-blog.png';
+        $fileAbout = ('../../public/images/about/how-to-create-a-blog.png');
         $imageAbout = new UploadedFile($fileAbout, $fileAbout, null, false, true);
         $newAbout->setDescription('Personnaliser votre profil') 
                  ->setImageFile($imageAbout);            
         $user->addAbout($newAbout);
 
         $newHeader = new Header();
-        $fileHeader = '..\..\blog\public\images\header\header.jpg';
+        $fileHeader = '../../public/images/header/header.jpg';
         $imageHeader = new UploadedFile($fileHeader, $fileHeader, null, false, true);
         $newHeader->setTitle('Bienvenue sur votre Blog')
                   ->setSubtitle('Commencer à le personnaliser')
