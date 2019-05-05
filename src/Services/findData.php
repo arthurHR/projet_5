@@ -51,7 +51,7 @@ class findData
 
     public function setDefaultContent ($user, $entityManager) {
         $newAbout = new About();
-        $fileAbout = ('../../public/images/about/how-to-create-a-blog.png');
+        $fileAbout = ($_SERVER['DOCUMENT_ROOT']  . 'public/images/about/how-to-create-a-blog.png');
         $imageAbout = new UploadedFile($fileAbout, $fileAbout, null, false, true);
         $newAbout->setDescription('Personnaliser votre profil') 
                  ->setImageFile($imageAbout);            
