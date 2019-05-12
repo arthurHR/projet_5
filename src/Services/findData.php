@@ -26,12 +26,9 @@ class findData
 
     public function __construct(RequestStack $requestStack, SkillsRepository $repoSkills, ProjectsRepository $repoProjects, AboutRepository $repoAbout, HeaderRepository $repoHeader,  UserManagerInterface $userManager, EntityManagerInterface $entityManager)
     {
-        /* $roles = "ROLE_SUPER_ADMIN"; */
-        /* $admin=$repository->findByRoles($roles); */
         $request = $this->request = $requestStack->getCurrentRequest();
         $userName = $request->get('currentUser');
         $user = $userManager->findUserByUsername($userName);
-        dump($user);
         $header = $user->getHeaders();
         $about = $user->getAbouts();
         if(count($header) < 1 || count($about) < 1){
@@ -41,7 +38,6 @@ class findData
         $projects = $user->getProjects();
         $this->data = array(
             "user" => $user,
-            /*"admin" => $admin,*/
             "header" => $header,
             "about" => $about,
             "skills" => $skills,
