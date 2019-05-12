@@ -7,6 +7,7 @@ require('../ajax/addItem.js');
 require('../ajax/deleteItem.js');
 require('../ajax/updateItem.js');
 require('../ajax/previewImage.js');
+require('../ajax/sendMessage.js');
 require('../startbootstrap-creative/js/creative.js');
 
 
