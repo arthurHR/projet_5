@@ -56,18 +56,8 @@ class BlogController extends AbstractController
      * @Route("/user/{currentUser}" , name="home")
      */
     public function homeAction(Request $request, findData $findData, $currentUser) {
-       /* if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER')){
-            $user = $this->container->get('security.token_storage')->getToken()->getUser();
-          if ($user == $currentUser or $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){*/
-                $data = $findData->data;
-                return $this->render('blog/home.html.twig', ['data' => $data]);
-           /* } else {
-                return $this->redirectToRoute('fos_user_security_logout');
-            }
-        } else {
-            $data = $findData->data;
-            return $this->render('blog/home.html.twig', ['data' => $data]);
-        }*/
+        $data = $findData->data;
+        return $this->render('blog/home.html.twig', ['data' => $data]); 
     }
 
       /**
@@ -84,7 +74,6 @@ class BlogController extends AbstractController
      */
     public function addSkillAction(Request $request)
     {
-        
         $skills = new Skills();
         $form = $this->createForm(SkillsType::class, $skills, array(
             'action' => $this->generateUrl($request->get('_route'))
@@ -278,7 +267,7 @@ class BlogController extends AbstractController
             //$messageContent = $this->render('blog/views/email/email.html.twig', ['contactData' => $contactFormData]);
             $result = $mgClient->sendMessage($domain, array(
                 'from'    =>  $contactFormData['from'],
-                'to'      =>  'maxime.rungette@gmail.com',
+                'to'      =>  $emailUser,
                 'subject' => 'CreateYourPortfolio',
                 'text'    =>  $contactFormData['message']
             ));
