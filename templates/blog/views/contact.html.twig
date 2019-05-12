@@ -21,6 +21,7 @@
 				<a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary btn-xl">Modifier mes informations</a>
 			</div>
         {% else %}
+			{{ encore_entry_script_tags('mainPage') }}
            {% include 'blog/views/modal/message.html.twig' %}
         {% endif %}
 	</div>
