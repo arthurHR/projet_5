@@ -1,7 +1,6 @@
 require('jquery-form');
 
 $(document).ready(function(){
-
     addSkill = Object.create(addItem);
     var eventItem = $('#skill_add_Modal');
     var url = '/addSkill';
