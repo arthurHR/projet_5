@@ -34,14 +34,14 @@
             <div class="container">
                 <div class="col-lg-8">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <a class="btn btn-primary btn-xl js-scroll-trigger topButton" href="{{ path('main') }}"><i class="fas fa-angle-double-left"></i> mon porfolio</a>
+                        <a class="btn btn-primary btn-xl js-scroll-trigger topButton" href="{{ path('main') }}"><i class="fas fa-angle-double-left"></i> Mon porfolio</a>
                     {% else %}
-                        <a class="btn btn-primary btn-xl js-scroll-trigger topButton" href="{{ path('main') }}"><i class="fas fa-angle-double-left"></i> page d'accueil</a>
+                        <a class="btn btn-primary btn-xl js-scroll-trigger topButton" href="{{ path('main') }}"><i class="fas fa-angle-double-left"></i> Page d'accueil</a>
                     {% endif %}
                 </div>
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <h2 class="section-heading text-white">Les personnes qui ont essayés CYP</h2>
+                        <h2 class="section-heading text-white">Les personnes qui ont essayé CYP</h2>
                         <hr class="light my-4">
 
                     </div>
@@ -55,12 +55,11 @@
                                 <img class="card-img-top" src="{{ vich_uploader_asset(info, 'imageFile') }}" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title border-bottom pb-3">{{ info.user.firstname }} {{ info.user.lastname }}</h5>
-                                    <strong>{{ info.title }}</strong>
-                                    <p class="card-text">{{ info.subtitle }}</p>
-                                    <a href="{{ path('home', {'currentUser': info.user.username}) }}" class="btn btn-sm btn-primary float-right">Voir le portfolio <i class="fas fa-angle-double-right"></i></a>
+                                    <strong>{{ info.title }}</strong></br>
+                                    <a href="{{ path('home', {'currentUser': info.user.username}) }}" class="btn btn-sm btn-primary float-right card_button">Voir le portfolio <i class="fas fa-angle-double-right"></i></a>
                                 </div>
                                 {% if is_granted('ROLE_ADMIN') %}
-                                    <a class="btn btn-sm btn-danger" href="{{ path('deleteUser', {'User': info.user.username}) }} ">Supprimer le profil</a>
+                                    <a class="btn btn-sm btn-danger float-right card_button" href="{{ path('deleteUser', {'User': info.user.username}) }} ">Supprimer le profil</a>
                                 {% endif %}
                             </div>
                         </div>

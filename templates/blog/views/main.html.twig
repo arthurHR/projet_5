@@ -40,7 +40,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <h2 class="section-heading text-white">Les personnes qui ont essayés CYP</h2>
+                        <h2 class="section-heading text-white">Les personnes qui ont essayé CYP</h2>
                         <hr class="light my-4">
 
                     </div>
@@ -53,10 +53,10 @@
                             <div class="card">
                                 <img class="card-img-top" src="{{ vich_uploader_asset(info, 'imageFile') }}" alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title border-bottom pb-3">{{ info.user.firstname }} {{ info.user.lastname }}</h5>
+                                    <h5 class="card-title border-bottom pb-3 ">{{ info.user.firstname }} {{ info.user.lastname }}</h5>
                                     <strong>{{ info.title }}</strong>
-                                    <p class="card-text">{{ info.subtitle }}</p>
-                                    <a href="{{ path('home', {'currentUser': info.user.username}) }}" class="btn btn-sm btn-primary float-right">Voir le portfolio<i class="fas fa-angle-double-right"></i></a>
+                                    </br>
+                                    <a href="{{ path('home', {'currentUser': info.user.username}) }}" class="btn btn-sm btn-primary card_button">Voir le portfolio<i class="fas fa-angle-double-right"></i></a>
                                 </div>
                             </div>
                         </div>

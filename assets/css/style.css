@@ -30,6 +30,19 @@ div.modal-dialog{
   color : black;
 }
 
+.card{
+  margin-top : 30px;
+}
+
+.card-img-top {
+  max-height: 200px;
+}
+
+.card_button {
+  margin-top: 10px;
+  float: right;
+}
+
 /* navbar */
 
 
@@ -122,6 +135,12 @@ div.project button {
 div.project:hover button {
   visibility: visible;
   opacity: 1;
+}
+
+.projects_img {
+  max-width: 100%;
+  width: 100%;
+  height: 400px;
 }
 
 /* section contact */

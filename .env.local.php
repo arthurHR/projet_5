@@ -6,6 +6,5 @@ return array (
   'APP_ENV' => 'dev',
   'APP_SECRET' => '34a3a138bc75430cf5d9422198634548',
   'DATABASE_URL' => 'mysql://root:@127.0.0.1:3306/mon_blog',
-  'MAILER_URL' => 'gmail://richarthur123@gmail.com:pirrouette93@localhost',
 );
 
